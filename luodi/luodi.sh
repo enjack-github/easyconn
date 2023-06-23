@@ -12,3 +12,9 @@ echo "卸载v2ray"
 
 echo "安装v2ray"
 ./v2ray-install-release.sh
+
+https://github.com/enjack-github/easyconn/blob/main/luodi/v2ray/config/v2ray.service
+echo "下载v2ray.service文件"
+wget -O v2ray.service https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/v2ray/config/v2ray.service
+rm /etc/systemd/system/v2ray.service
+cp v2ray.service /etc/systemd/system/v2ray.service
