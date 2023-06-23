@@ -14,7 +14,8 @@ case $input in
 
     [nN][oO]|[nN])
 		echo "No"
-       	;;
+  		exit 1
+       		;;
 
     *)
 		echo "Invalid input..."
