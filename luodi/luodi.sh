@@ -9,11 +9,11 @@
 read -r -p "运行此脚本会卸载v2ray等服务，之前的节点也将不可用，是否继续安装? [Y/n] " input
 case $input in
     [yY][eE][sS]|[yY])
-		echo "Yes"
+		echo "开始安装"
 		;;
 
     [nN][oO]|[nN])
-		echo "No"
+		echo "退出安装"
   		exit 1
        		;;
 
