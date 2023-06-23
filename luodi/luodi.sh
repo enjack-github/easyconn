@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #curl https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/luodi.sh | bash
+#wget -O luodi.sh https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/luodi.sh && sudo bash luodi.sh
 #一键安装落地机翻墙服务
 #搭配中转机使用
 
