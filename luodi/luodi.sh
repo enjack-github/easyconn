@@ -44,3 +44,12 @@ chmod 777 /etc/nginx/nginx.conf
 echo "重启v2ray nginx"
 systemctl restart v2ray.service
 systemctl restart nginx.service
+
+echo -e "\n\n\n"
+echo "安装完成！！！！！！！！"
+echo "协议: vmess"
+echo "端口: 9800"
+echo "用户id: af41686b-cb85-494a-a554-eeaa1514bca7"
+echo "加密方式: none"
+echo "传输协议: ws"
+echo "路径: /ab596b5a5d3636b5-002"
