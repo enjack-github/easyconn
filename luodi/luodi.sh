@@ -5,7 +5,7 @@
 #一键安装落地机翻墙服务
 #搭配中转机使用
 
-
+#确认要安装
 read -r -p "Are You Sure? [Y/n] " input
 case $input in
     [yY][eE][sS]|[yY])
