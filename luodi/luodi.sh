@@ -30,3 +30,6 @@ rm vmess.json
 wget -O vmess.json https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/v2ray/config/vmess.json
 rm /usr/local/etc/v2ray/config.json
 cp vmess.json /usr/local/etc/v2ray/config.json
+
+echo "重启v2ray"
+systemctl restart v2ray.service
