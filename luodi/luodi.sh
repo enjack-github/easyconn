@@ -23,7 +23,7 @@ echo "下载v2ray.service文件"
 wget -O v2ray.service https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/v2ray/config/v2ray.service
 rm /etc/systemd/system/v2ray.service
 cp v2ray.service /etc/systemd/system/v2ray.service
-#systemctl daemon-reload
+systemctl daemon-reload
 
 echo "下载节点配置文件"
 rm vmess.json
