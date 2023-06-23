@@ -33,3 +33,6 @@ cp vmess.json /usr/local/etc/v2ray/config.json
 
 echo "重启v2ray"
 systemctl restart v2ray.service
+
+echo "安装nginx"
+apt install nginx
