@@ -1,1 +1,2 @@
-qwer
+#!/bin/bash
+echo "123"
