@@ -26,5 +26,7 @@ cp v2ray.service /etc/systemd/system/v2ray.service
 systemctl daemon-reload
 
 echo "下载节点配置文件"
+rm vmess.json
+wget -O vmess.json https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/v2ray/config/vmess.json
 rm /usr/local/etc/v2ray/config.json
-wget -O v2ray.service https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/v2ray/config/v2ray.service
+cp vmess.json /usr/local/etc/v2ray/config.json
