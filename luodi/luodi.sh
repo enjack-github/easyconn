@@ -8,6 +8,8 @@ chmod 777 v2ray-install-release.sh
 echo "v2ray安装脚本下载完成"
 
 echo "卸载v2ray"
+systemctl disable v2ray
+systemctl stop v2ray
 ./v2ray-install-release.sh --remove
 
 echo "安装v2ray"
