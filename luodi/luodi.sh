@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#curl https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/luodi.sh | bash
+#一键安装落地机翻墙服务
+#搭配中转机使用
+
 echo "下载v2ray安装脚本"
 #bash <(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) --remove
 rm v2ray-install-release.sh
