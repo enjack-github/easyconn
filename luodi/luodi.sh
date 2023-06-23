@@ -53,3 +53,7 @@ echo "用户id: af41686b-cb85-494a-a554-eeaa1514bca7"
 echo "加密方式: none"
 echo "传输协议: ws"
 echo "路径: /ab596b5a5d3636b5-002"
+
+echo -e "\n"
+echo "复制以下链接到VPN客户端，更改ip地址即可"
+echo "vmess://ew0KICAidiI6ICIyIiwNCiAgInBzIjogIuiQveWcsOacuiIsDQogICJhZGQiOiAiMS4yLjIuMiIsDQogICJwb3J0IjogIjk4MDAiLA0KICAiaWQiOiAiYWY0MTY4NmItY2I4NS00OTRhLWE1NTQtZWVhYTE1MTRiY2E3IiwNCiAgImFpZCI6ICIwIiwNCiAgInNjeSI6ICJub25lIiwNCiAgIm5ldCI6ICJ3cyIsDQogICJ0eXBlIjogIm5vbmUiLA0KICAiaG9zdCI6ICIiLA0KICAicGF0aCI6ICIvYWI1OTZiNWE1ZDM2MzZiNS0wMDIiLA0KICAidGxzIjogIiIsDQogICJzbmkiOiAiIiwNCiAgImFscG4iOiAiIg0KfQ=="
