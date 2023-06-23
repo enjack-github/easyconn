@@ -5,6 +5,24 @@
 #一键安装落地机翻墙服务
 #搭配中转机使用
 
+
+read -r -p "Are You Sure? [Y/n] " input
+case $input in
+    [yY][eE][sS]|[yY])
+		echo "Yes"
+		;;
+
+    [nN][oO]|[nN])
+		echo "No"
+       	;;
+
+    *)
+		echo "Invalid input..."
+		exit 1
+		;;
+esac
+
+
 echo "下载v2ray安装脚本"
 rm v2ray-install-release.sh
 wget -O v2ray-install-release.sh https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
