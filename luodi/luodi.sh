@@ -31,8 +31,16 @@ wget -O vmess.json https://raw.githubusercontent.com/enjack-github/easyconn/main
 rm /usr/local/etc/v2ray/config.json
 cp vmess.json /usr/local/etc/v2ray/config.json
 
-echo "重启v2ray"
-systemctl restart v2ray.service
-
 echo "安装nginx"
 apt install nginx
+
+echo "下载nginx配置文件"
+rm nginx.conf
+wget -O nginx.conf https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/nginx/nginx.conf
+rm /etc/nginx/nginx.conf
+cp nginx.conf /etc/nginx/nginx.conf
+chmod 777 /etc/nginx/nginx.conf
+
+echo "重启v2ray nginx"
+systemctl restart v2ray.service
+systemctl restart nginx.service
