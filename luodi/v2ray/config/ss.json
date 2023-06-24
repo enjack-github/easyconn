@@ -15,8 +15,12 @@
       "level": 0
     },
     "streamSettings": {
-        "network": "tcp"
-     }
+          "network": "ws",
+          "security": "none",
+          "wsSettings": {
+            "path": "/ab596b5a5d3636b5-002"
+          }
+    }
   },
   "outbound": {
     "protocol": "freedom",
