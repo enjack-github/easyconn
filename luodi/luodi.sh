@@ -24,13 +24,25 @@
 #esac
 
 #函数---显示安装结束后的配置信息
-function print_result_info() {		
-	echo "协议: "$1
-	echo "端口: 9800"
-	echo "用户id: af41686b-cb85-494a-a554-eeaa1514bca7"
-	echo "加密方式: none"
-	echo "传输协议: ws"
-	echo "路径: /ab596b5a5d3636b5-002"
+function print_result_info() {
+	
+	if [[ "vmess" = "$1" || "vless" = "$1" ]]; then		
+		echo "协议: "$1
+		echo "端口: 9800"
+		echo "用户id: af41686b-cb85-494a-a554-eeaa1514bca7"
+		echo "加密方式: none"
+		echo "传输协议: ws"
+		echo "路径: /ab596b5a5d3636b5-002"
+	fi
+
+	if [ "ss" = "$1" ]; then		
+		echo "协议: "$1
+		echo "端口: 9800"
+		echo "密码: a25b63c555a5987d6"
+		echo "加密方式: chacha20-ietf-poly1305"
+		echo "传输协议: ws"
+		echo "路径: /ab596b5a5d3636b5-002"
+	fi
 
 	echo -e "\n"
 	if [ "vmess" = "$1" ]
@@ -39,18 +51,17 @@ function print_result_info() {
 		echo "vmess://ew0KICAidiI6ICIyIiwNCiAgInBzIjogIuiQveWcsOacuiIsDQogICJhZGQiOiAiMS4yLjIuMiIsDQogICJwb3J0IjogIjk4MDAiLA0KICAiaWQiOiAiYWY0MTY4NmItY2I4NS00OTRhLWE1NTQtZWVhYTE1MTRiY2E3IiwNCiAgImFpZCI6ICIwIiwNCiAgInNjeSI6ICJub25lIiwNCiAgIm5ldCI6ICJ3cyIsDQogICJ0eXBlIjogIm5vbmUiLA0KICAiaG9zdCI6ICIiLA0KICAicGF0aCI6ICIvYWI1OTZiNWE1ZDM2MzZiNS0wMDIiLA0KICAidGxzIjogIiIsDQogICJzbmkiOiAiIiwNCiAgImFscG4iOiAiIg0KfQ=="
 	elif [ "vless" = "$1" ]
 	then
-		echo "复制以下链接到VPN客户端，更改ip地址即可"
-		echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@1.2.2:9800?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b5-002#%E8%90%BD%E5%9C%B0%E6%9C%BA"
+		echo "复制以下链接到VPN客户端，更改ip地址"
+		echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@1.2.2.2:9800?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b5-002#%E8%90%BD%E5%9C%B0%E6%9C%BA"
 	elif [ "ss" = "$1" ]
 	then
-		echo "下载ss配置文件"
-		echo "33"
+		echo "复制以下链接到VPN客户端，更改ip地址，选择ws，更改路径(ss链接无法包含以上信息,只能手动添加)"
+		echo "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphMjViNjNjNTU1YTU5ODdkNg==@1.2.2.2:9800#%E8%90%BD%E5%9C%B0%E6%9C%BA"
 	elif [ "trojan" = "$1" ]
 	then
-		echo "下载trojan配置文件"
-		echo "44"
+		echo "不支持trajan(必带tls)"
 	else
-		echo "为安装v2ray等服务，请先安装！"
+		echo "未安装v2ray等服务，请先安装！"
 	fi	
 	
 	echo -e "\n\n"
@@ -64,7 +75,7 @@ function check_what_protocol_and_print() {
 	    print_result_info "vmess"
 	elif [[ $pro =~ "vless" ]];then
 		print_result_info "vless"
-	elif [[ $pro =~ "ss" ]];then
+	elif [[ $pro =~ "shadowsocks" ]];then
 		print_result_info "ss"
 	elif [[ $pro =~ "trojan" ]];then
 		print_result_info "trojan"
@@ -134,7 +145,7 @@ echo -e "\n\n需要安装以下哪种协议?"
 echo "1) vmess"
 echo "2) vless"
 echo "3) ss"
-echo "4) trojan"
+#echo "4) trojan"
 read -r -p "请输入数字选择: " input
 case $input in
     1) 
@@ -149,16 +160,25 @@ case $input in
     		echo "选定安装ss协议"
     		protocol_choice="ss"
     		;;
-    4) 
-    		echo "选定安装trojan协议"
-    		protocol_choice="trojan"
-    		;;
+#    4) 
+#    		echo "选定安装trojan协议"
+#    		protocol_choice="trojan"
+#    		;;
     *) 
     		echo "invalid option...退出安装"
     		exit 1
     		;;
 esac
 
+echo "安装依赖包"
+apt update -y && apt install -y netcat && apt install -y net-tools && apt install -y curl && apt install -y socat && apt install -y wget && apt install -y unzip && apt install -y ufw
+
+#防火墙设置
+echo "设置ufw"
+ufw allow ssh
+ufw allow 9800
+ufw allow 80
+ufw disable
 
 echo "下载v2ray安装脚本"
 rm v2ray-install-release.sh
@@ -189,11 +209,11 @@ then
 elif [ "ss" = $protocol_choice ]
 then
 	echo "下载ss配置文件"
-	echo "33"
+	wget -O jiedian.json https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/v2ray/config/ss.json
 elif [ "trojan" = $protocol_choice ]
 then
 	echo "下载trojan配置文件"
-	echo "44"
+	wget -O jiedian.json https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/v2ray/config/trojan.json
 else
 	echo "下载vmess配置文件"
 	wget -O jiedian.json https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/v2ray/config/vmess.json
