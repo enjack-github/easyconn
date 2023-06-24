@@ -235,6 +235,10 @@ echo "重启v2ray nginx"
 systemctl restart v2ray.service
 systemctl restart nginx.service
 
+#设置开机启动(v2ray需要设置，nginx本身就会自启动)
+sudo systemctl enable v2ray.service
+sudo systemctl enable nginx.service
+
 echo -e "\n\n\n"
 echo "安装完成！！！！！！！！"
 
