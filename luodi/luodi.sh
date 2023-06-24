@@ -222,7 +222,7 @@ rm /usr/local/etc/v2ray/config.json
 cp jiedian.json /usr/local/etc/v2ray/config.json
 
 echo "安装nginx"
-apt install nginx
+apt install -y nginx
 
 echo "下载nginx配置文件"
 rm nginx.conf
