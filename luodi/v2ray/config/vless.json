@@ -1,1 +1,30 @@
-luodi/v2ray/config
+{
+  "inbounds": [
+    {
+      "listen": "127.0.0.1",
+      "port": 9801, 
+      "protocol": "vless",    
+      "settings": {
+        "clients": [
+          {
+            "id": "af41686b-cb85-494a-a554-eeaa1514bca7",  
+            "alterId": 0
+          }
+        ]
+      },
+      "streamSettings": {
+            "network": "ws",
+            "security": "none",
+            "wsSettings": {
+              "path": "/ab596b5a5d3636b5-002"
+            }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
+}
