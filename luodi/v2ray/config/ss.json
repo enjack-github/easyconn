@@ -1,0 +1,22 @@
+{
+"log": {
+"access": "",
+"error": "",
+"loglevel": "debug"
+},
+  "inbound": {
+    "port": 9801,
+    "listen": "127.0.0.1",
+    "protocol": "shadowsocks",
+    "settings": {
+      "method": "chacha20-ietf-poly1305",
+      "password": "a25b63c555a5987d6",
+      "udp": false,
+      "level": 0
+    },
+  },
+  "outbound": {
+    "protocol": "freedom",
+    "settings": {}
+  }
+}
