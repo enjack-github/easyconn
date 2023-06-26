@@ -170,8 +170,9 @@ case $input in
     		;;
 esac
 
-echo "安装依赖包"
-apt update -y && apt install -y netcat && apt install -y net-tools && apt install -y curl && apt install -y socat && apt install -y wget && apt install -y unzip && apt install -y ufw
+#echo "安装依赖包"
+#apt update -y && apt install -y netcat && apt install -y net-tools && apt install -y curl && apt install -y socat && apt install -y wget && apt install -y unzip && apt install -y ufw
+apt update -y
 
 #防火墙设置
 echo "设置ufw"
