@@ -24,9 +24,8 @@
                     "path": "/ab596b5a5d3636b5-002" 
                 }
             }
-        }
-    ],
-      "inbounds": [
+        },
+
         {
             "port": 9802,
             "listen": "127.0.0.1",
@@ -48,8 +47,10 @@
                     "path": "/ab596b5a5d3636b5-003" 
                 }
             }
-        }
+        }        
     ],
+
+
     "outbounds": [
         {
             "protocol": "freedom"
