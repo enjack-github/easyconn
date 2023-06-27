@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #一键安装脚本
-#wget -O luodi2.sh https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/luodi2.sh && sudo bash luodi2.sh
-#安装两个vless，分别用9801 9802，其中一个节点当作备用线路
+#wget -O luodi3.sh https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/luodi3.sh && sudo bash luodi3.sh
+#nginx监听两个端口，两个端口(服务)内容一摸一样，一个作为备用线路
 #搭配中转机使用
 
 #函数---获取ip
@@ -33,20 +33,19 @@ function print_result_info() {
 	echo "传输协议: ws"
 	echo "路径: /ab596b5a5d3636b5-002"
 	echo "复制以下链接到VPN客户端"
-#	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@1.2.2.2:9800?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b5-002#%E8%90%BD%E5%9C%B0%E6%9C%BA"
 	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9800?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b5-002#%E8%90%BD%E5%9C%B0%E6%9C%BA"
 
 	echo -e "\n"
 
 	echo "节点2--->"
 	echo "协议: "$1
-	echo "端口: 9800"
+	echo "端口: 9900"
 	echo "用户id: af41686b-cb85-494a-a554-eeaa1514bca7"
 	echo "加密方式: none"
 	echo "传输协议: ws"
-	echo "路径: /ab596b5a5d3636b5-003"
+	echo "路径: /ab596b5a5d3636b5-002"
 	echo "复制以下链接到VPN客户端"
-	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9800?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b5-003#%E8%90%BD%E5%9C%B0%E6%9C%BA"	
+	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9900?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b5-002#%E8%90%BD%E5%9C%B0%E6%9C%BA"	
 
 	echo "============================================================"
 	echo -e "\n\n"
@@ -132,6 +131,7 @@ apt update -y
 echo "设置ufw"
 ufw allow ssh
 ufw allow 9800
+ufw allow 9900
 ufw allow 80
 ufw disable
 
@@ -157,7 +157,7 @@ systemctl daemon-reload
 
 echo "下载节点配置文件"
 rm jiedian.json
-wget -O jiedian.json https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/v2ray/config/vless-two-ws.json
+wget -O jiedian.json https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/v2ray/config/vless-only.json
 rm /usr/local/etc/v2ray/config.json
 cp jiedian.json /usr/local/etc/v2ray/config.json
 
@@ -166,9 +166,9 @@ apt install -y nginx
 
 echo "下载nginx配置文件"
 rm nginx.conf
-wget -O nginx2.conf https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/nginx/nginx2.conf
+wget -O nginx.conf https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/nginx/nginx3.conf
 rm /etc/nginx/nginx.conf
-cp nginx2.conf /etc/nginx/nginx.conf
+cp nginx.conf /etc/nginx/nginx.conf
 chmod 777 /etc/nginx/nginx.conf
 
 #启用bbr
