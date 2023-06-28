@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#wget -O self-dns-install.sh https://raw.githubusercontent.com/enjack-github/easyconn/main/self-dns/self-dns-install.sh && sudo bash self-dns-install.sh
+#一键搭建DNS脚本，使用自身作为dns缓存/转发服务器
+
 function add_crontab() {
 	#读取原来的内容到临时文件
 	crontab -l > /tmp/ori_cron_list
