@@ -33,7 +33,7 @@ function print_result_info() {
 	echo "传输协议: ws"
 	echo "路径: /ab596b5a5d3636b5-002"
 	echo "复制以下链接到VPN客户端"
-	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9800?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b5-002#%E8%90%BD%E5%9C%B0%E6%9C%BA"
+	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9800?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b5-002#MyVless"
 
 	echo -e "\n"
 
@@ -45,7 +45,7 @@ function print_result_info() {
 	echo "传输协议: ws"
 	echo "路径: /ab596b5a5d3636b5-002"
 	echo "复制以下链接到VPN客户端"
-	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9900?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b5-002#%E8%90%BD%E5%9C%B0%E6%9C%BA"	
+	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9900?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b5-002#MyVless"	
 
 	echo "============================================================"
 	echo -e "\n\n"
