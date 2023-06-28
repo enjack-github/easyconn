@@ -25,7 +25,7 @@ function add_crontab() {
 	fi	
 	
 	crontab /tmp/ori_cron_list
-	echo "已经添加覆写脚本任务到列表"
+	echo "已经添加覆写脚本任务到任务列表"
 }
 
 #安装dns工具，用于各种测试
@@ -68,6 +68,10 @@ wget -O rewrite.resolved.sh https://raw.githubusercontent.com/enjack-github/easy
 rm /etc/rewrite.resolved.sh
 cp rewrite.resolved.sh /etc/rewrite.resolved.sh
 chmod 777 /etc/rewrite.resolved.sh
+chmod 777 rewrite.resolved.sh
+./rewrite.resolved.sh 
 
 add_crontab
 systemctl start bind9
+
+echo "dns服务安装完成，已更改DNS为本机地址"
