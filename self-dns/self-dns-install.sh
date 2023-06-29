@@ -28,6 +28,59 @@ function add_crontab() {
 	echo "已经添加覆写脚本任务到任务列表"
 }
 
+#脚本功能选择
+while true
+do
+echo -e "\n选择以下脚本功能---"
+echo "1) 安装"
+echo "2) 重启服务"
+echo "3) 查看bind运行状态"
+echo "4) 查看bind配置文件"
+echo "5) 查看/etc/resolv.conf"
+echo "6) 运行nameserver覆写脚本"
+read -r -p "请输入数字选择: " input
+case $input in
+    1) 
+    		echo "开始安装"
+    		break
+    		;;
+    2) 
+		systemctl restart systemd-resolved.service
+		systemctl restart bind9.service
+		rm rewrite.resolved.sh
+		wget -O rewrite.resolved.sh https://raw.githubusercontent.com/enjack-github/easyconn/main/self-dns/rewrite.resolved.sh
+		chmod 777 rewrite.resolved.sh
+		./rewrite.resolved.sh	
+		echo "服务已重启"	
+    		continue
+    		;;
+    3) 
+		systemctl status bind9
+    		continue
+    		;;    		
+    4) 
+    		cat /etc/bind/named.conf.options
+    		continue
+    		;;
+    5) 
+    		echo -e "\n/etc/resolv.conf内容如下："
+    		cat /etc/resolv.conf
+    		continue
+    		;;
+    6) 
+		rm rewrite.resolved.sh
+		wget -O rewrite.resolved.sh https://raw.githubusercontent.com/enjack-github/easyconn/main/self-dns/rewrite.resolved.sh
+		chmod 777 rewrite.resolved.sh
+		./rewrite.resolved.sh
+    		continue
+    		;;   		
+    *) 
+    		echo "invalid option...退出脚本"
+    		exit 1
+    		;;
+esac
+done
+
 #安装dns工具，用于各种测试
 apt-get install -y dnsutils
 
