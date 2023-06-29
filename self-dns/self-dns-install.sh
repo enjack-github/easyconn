@@ -38,6 +38,8 @@ echo "3) 查看bind运行状态"
 echo "4) 查看bind配置文件"
 echo "5) 查看/etc/resolv.conf"
 echo "6) 运行nameserver覆写脚本"
+echo "7) dig tiktok.com"
+echo "8) tcpdump抓取dns"
 read -r -p "请输入数字选择: " input
 case $input in
     1) 
@@ -73,7 +75,16 @@ case $input in
 		chmod 777 rewrite.resolved.sh
 		./rewrite.resolved.sh
     		continue
-    		;;   		
+    		;;   
+    7) 
+		dig tiktok.com
+		dig tiktok.com
+    		continue
+    		;;  
+    8) 
+		tcpdump -nt -s 500 port domain
+    		continue
+    		;;     	   				
     *) 
     		echo "invalid option...退出脚本"
     		exit 1
