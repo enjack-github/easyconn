@@ -89,6 +89,7 @@ case $input in
     		;;
     2) 
     		echo -e "\n\n\n\n\n\n\n\n\n\n\n\n"
+      		get_my_ip
     		check_what_protocol_and_print
     		continue
     		;;
