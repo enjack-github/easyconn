@@ -98,6 +98,14 @@ apt-get install -y dnsutils
 #安装bind9
 apt-get install -y bind9
 
+#判断bind是否安装成功
+if [ ! -f "/etc/bind/named.conf.options" ]; then
+	echo "bind未安装成功，没有找到/etc/bind/named.conf.options"
+	echo "退出安装"
+	exit 1
+fi
+
+
 #下载named.conf.options配置文件
 echo "下载named.conf.options配置文件"
 rm named.conf.options
