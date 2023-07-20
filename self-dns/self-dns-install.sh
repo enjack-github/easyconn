@@ -113,6 +113,7 @@ echo -e "\n选择地区---"
 echo "1) 马来西亚"
 echo "2) 泰国"
 echo "3) 印尼"
+echo "4) 台湾"
 read -r -p "请输入数字选择: " input
 case $input in
     1) 
@@ -124,7 +125,10 @@ case $input in
     		;;
     3) 
 		wget -O named.conf.options https://raw.githubusercontent.com/enjack-github/easyconn/main/self-dns/bind-conf/id.conf
-    		;;   		 		
+    		;;   	
+    4) 
+		wget -O named.conf.options https://raw.githubusercontent.com/enjack-github/easyconn/main/self-dns/bind-conf/tw.conf
+    		;;   
     *) 
     		echo "invalid option...退出脚本"
     		exit 1
