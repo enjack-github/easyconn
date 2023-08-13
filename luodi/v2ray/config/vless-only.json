@@ -45,6 +45,7 @@
                 "network": "ws",
                 "security": "none",
                 "wsSettings": {
+                    "path": "/replace-with-you-path" 
                 }
             }
         }         
