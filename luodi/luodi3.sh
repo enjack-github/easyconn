@@ -18,6 +18,10 @@ function get_my_ip() {
 	
 	#截取"之后的内容，要用转义字符，注意*号位置和之前不同
 	my_ip=${my_ip%%\"*}
+
+	#当前IP的base64编码
+	ip_base64=$(echo $my_ip | base64)
+	echo $ip_base64		
 }
 
 #函数---显示安装结束后的配置信息
@@ -45,7 +49,7 @@ function print_result_info() {
 	echo "传输协议: ws"
 	echo "路径: /ab596b5a5d3636b5-002"
 	echo "复制以下链接到VPN客户端"
-	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9900?encryption=none&security=none&type=ws#MyVless"	
+	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9900?encryption=none&security=none&type=ws&path=%$ip_base64#MyVless"
 
 	echo "============================================================"
 	echo -e "\n\n"
@@ -128,6 +132,10 @@ protocol_choice="vless"
 #apt update -y && apt install -y netcat && apt install -y net-tools && apt install -y curl && apt install -y socat && apt install -y wget && apt install -y unzip && apt install -y ufw
 apt update -y
 
+#获取ip
+my_ip="1.2.2.2"
+get_my_ip
+
 #防火墙设置
 echo "设置ufw"
 ufw allow ssh
@@ -161,6 +169,8 @@ rm jiedian.json
 wget -O jiedian.json https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/v2ray/config/vless-only.json
 rm /usr/local/etc/v2ray/config.json
 cp jiedian.json /usr/local/etc/v2ray/config.json
+#用当前ip的base64编码，作为ws路径
+sed -i "s/replace-with-you-path/$ip_base64/g" /usr/local/etc/v2ray/config.json
 
 echo "安装nginx"
 apt install -y nginx
@@ -171,6 +181,8 @@ wget -O nginx.conf https://raw.githubusercontent.com/enjack-github/easyconn/main
 rm /etc/nginx/nginx.conf
 cp nginx.conf /etc/nginx/nginx.conf
 chmod 777 /etc/nginx/nginx.conf
+#用当前ip的base64编码，作为ws路径
+sed -i "s/replace-with-you-path/$ip_base64/g" /etc/nginx/nginx.conf
 
 #启用bbr
 echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf && echo "net.ipv4.tcp_congestion_control= bbr" >> /etc/sysctl.conf&& sysctl -p
@@ -185,9 +197,5 @@ sudo systemctl enable nginx.service
 
 echo -e "\n\n\n"
 echo "安装完成！！！！！！！！"
-
-#获取ip
-my_ip="1.2.2.2"
-get_my_ip
 
 print_result_info $protocol_choice
