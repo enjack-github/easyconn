@@ -24,7 +24,30 @@
                     "path": "/ab596b5a5d3636b5-002" 
                 }
             }
-        }
+        },
+
+        
+         {
+            "port": 9802,
+            "listen": "127.0.0.1",
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "af41686b-cb85-494a-a554-eeaa1514bca7", 
+                        "level": 0,
+                        "email": "justafake@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "none",
+                "wsSettings": {
+                }
+            }
+        }         
     ],
     "outbounds": [
         {
