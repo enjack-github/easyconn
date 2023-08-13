@@ -21,7 +21,10 @@ function get_my_ip() {
 
 	#当前IP的base64编码
 	ip_base64=$(echo $my_ip | base64)
-	echo $ip_base64		
+
+ 	echo ip is: $my_ip
+	echo ip base64 is: $ip_base64	
+ 	echo -e "\n"
 }
 
 #函数---显示安装结束后的配置信息
