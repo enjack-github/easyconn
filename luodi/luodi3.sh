@@ -135,7 +135,6 @@ protocol_choice="vless"
 #echo "安装依赖包"
 #apt update -y && apt install -y netcat && apt install -y net-tools && apt install -y curl && apt install -y socat && apt install -y wget && apt install -y unzip && apt install -y ufw
 apt update -y
-exit 1
 
 #安装curl
 apt install -y curl
