@@ -22,6 +22,7 @@ function get_my_ip() {
 	#当前IP的base64编码
 	ip_base64=$(echo $my_ip | base64)
 
+	echo -e "\n"
  	echo ip is: $my_ip
 	echo ip base64 is: $ip_base64	
  	echo -e "\n"
