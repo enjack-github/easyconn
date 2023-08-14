@@ -51,9 +51,9 @@ function print_result_info() {
 	echo "用户id: af41686b-cb85-494a-a554-eeaa1514bca7"
 	echo "加密方式: none"
 	echo "传输协议: ws"
-	echo "路径: "$ip_base64
+	echo "路径: /"$ip_base64
 	echo "复制以下链接到VPN客户端"
-	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9900?encryption=none&security=none&type=ws&path=$ip_base64#MyVless"
+	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9900?encryption=none&security=none&type=ws&path=%2F$ip_base64#MyVless"
 
 	echo "============================================================"
 	echo -e "\n\n"
