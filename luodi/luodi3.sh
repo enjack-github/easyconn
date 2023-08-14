@@ -135,6 +135,9 @@ protocol_choice="vless"
 #apt update -y && apt install -y netcat && apt install -y net-tools && apt install -y curl && apt install -y socat && apt install -y wget && apt install -y unzip && apt install -y ufw
 apt update -y
 
+#安装curl
+apt install -y curl
+
 #获取ip
 my_ip="1.2.2.2"
 get_my_ip
