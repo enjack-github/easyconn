@@ -68,7 +68,7 @@ function check_what_protocol_and_print() {
 #脚本功能选择
 while true
 do
-echo -e "\n【ss一键脚本】"
+echo -e "\n【ss一键脚本】luodi6 ss+tcp 35520"
 echo -e "选择以下脚本功能---"
 echo "1) 安装"
 echo "2) 查看节点配置"
@@ -115,6 +115,8 @@ apt update -y
 
 #安装curl
 apt install -y curl
+
+wget -O checksh.sh https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/checksh.sh
 
 #获取ip
 my_ip="1.2.2.2"
