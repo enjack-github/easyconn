@@ -68,7 +68,7 @@ function check_what_protocol_and_print() {
 #脚本功能选择
 while true
 do
-echo -e "\n【vmess一键脚本】"
+echo -e "\n【vmess一键脚本】luodi5 vmess+tcp 35510"
 echo -e "选择以下脚本功能---"
 echo "1) 安装"
 echo "2) 查看节点配置"
