@@ -81,7 +81,8 @@ function check_what_protocol_and_print() {
 #脚本功能选择
 while true
 do
-echo -e "\n选择以下脚本功能---"
+echo -e "\n【vless一键脚本】luodi3 vless+ws   nginx(9800 9900)->vless"
+echo -e "选择以下脚本功能---"
 echo "1) 安装"
 echo "2) 查看节点配置"
 echo "3) 重启服务"
