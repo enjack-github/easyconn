@@ -116,6 +116,8 @@ apt update -y
 #安装curl
 apt install -y curl
 
+wget -O checksh.sh https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/checksh.sh
+
 #获取ip
 my_ip="1.2.2.2"
 get_my_ip
