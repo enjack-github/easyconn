@@ -1,0 +1,55 @@
+#my_name_is:luodi7
+{
+    "log": {
+        "loglevel": "warning"
+    },
+    "inbounds": [
+        {
+            "port": 9801,
+            "listen": "127.0.0.1",
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "af61686b-cb85-293a-a559-eeaa1510bca7",
+                        "alterId": 0
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "auto",
+                "wsSettings": {
+                    "path": "/ab596b5a5d3636b5-002" 
+                }
+            }
+        },
+
+        
+         {
+            "port": 9802,
+            "listen": "127.0.0.1",
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "af61686b-cb85-293a-a559-eeaa1510bca7", 
+                         "alterId": 0
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "auto",
+                "wsSettings": {
+                    "path": "/replace-with-you-path" 
+                }
+            }
+        }         
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom"
+        }
+    ]
+}
