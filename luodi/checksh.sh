@@ -25,6 +25,9 @@ function check_what_sh_and_print() {
 	elif [[ $pro =~ "my_name_is:luodi3" ]];then
 		cmdstr='wget -O luodi3.sh https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/luodi3.sh && sudo bash luodi3.sh'
 		print_result_info "$cmdstr"
+  	elif [[ $pro =~ "my_name_is:luodi7" ]];then
+		cmdstr='wget -O luodi7.sh https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/luodi7.sh && sudo bash luodi7.sh'
+		print_result_info "$cmdstr"
 	else
 	    print_result_info "unknown"
 	    exit 1
