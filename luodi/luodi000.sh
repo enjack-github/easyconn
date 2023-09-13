@@ -224,13 +224,78 @@ function print_vless_inbounds() {
 	echo "传输协议: ws"
 	echo "路径: /ab596b5a5d3636b579bc0d2f000"
 	echo "链接:"
-	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32018?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b579bc0d2f000#vless+ws+ng"				
+	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32018?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b579bc0d2f000#vless+ws+ng"		
+
+	echo -e "\n"
+	echo -e "\e[32m*** vless+kcp *** \e[0m"
+	echo "端口: 32019"
+	echo "用户id: af61686b-cb85-293a-a559-eeaa1510bca7"
+	echo "加密方式: none"
+	echo "传输协议: kcp"
+	echo "kcp seed:c25785a6987d235897"
+	echo "链接:"
+	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32019?encryption=none&security=none&type=kcp&headerType=none&seed=c25785a6987d235897#vless+kcp"				
 	echo "============================================================"
 }
 
 #函数---
-function print_vmess_inbounds() {
+function print_vmess_inbounds() {	
+	echo -e "\e[32m*** vmess+tcp *** \e[0m"
+	echo "端口: 32020"
+	echo "用户id: af61686b-cb85-293a-a559-eeaa1510bca7"
+	echo "加密方式: none"
+	echo "传输协议: tcp"
+	echo "链接:"
+	vmess_str='{"v": "2","ps": "vmess+tcp","add": "'${my_ip}'","port": "32020","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "none","net": "tcp","type": "none","host": "","path": "","tls": "","sni": "","alpn": ""}'
+	vmess_str='vmess://'$(echo $vmess_str | base64)
+	echo ${vmess_str}
 
+	echo -e "\n"
+	echo -e "\e[32m*** vmess+ws *** \e[0m"
+	echo "端口: 32021"
+	echo "用户id: af61686b-cb85-293a-a559-eeaa1510bca7"
+	echo "加密方式: auto"
+	echo "传输协议: ws"
+	echo "路径: /ab596b5a5d3636b579bc0d2f000"
+	echo "链接:"
+	vmess_str='{"v": "2","ps": "vmess+ws","add": "'${my_ip}'","port": "32021","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "auto","net": "ws","type": "none","host": "","path": "/ab596b5a5d3636b579bc0d2f000","tls": "","sni": "","alpn": ""}'
+	vmess_str='vmess://'$(echo $vmess_str | base64)
+	echo ${vmess_str}	
+
+	echo -e "\n"
+	echo -e "\e[32m*** vmess+tcp+ng *** \e[0m"
+	echo "端口: 32022"
+	echo "用户id: af61686b-cb85-293a-a559-eeaa1510bca7"
+	echo "加密方式: none"
+	echo "传输协议: tcp"
+	echo "链接:"
+	vmess_str='{"v": "2","ps": "vmess+tcp+ng","add": "'${my_ip}'","port": "32022","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "none","net": "tcp","type": "none","host": "","path": "","tls": "","sni": "","alpn": ""}'
+	vmess_str='vmess://'$(echo $vmess_str | base64)
+	echo ${vmess_str}	
+
+	echo -e "\n"
+	echo -e "\e[32m*** vmess+ws+ng *** \e[0m"
+	echo "端口: 32023"
+	echo "用户id: af61686b-cb85-293a-a559-eeaa1510bca7"
+	echo "加密方式: auto"
+	echo "传输协议: ws"
+	echo "路径: /ab596b5a5d3636b579bc0d2f000"
+	echo "链接:"
+	vmess_str='{"v": "2","ps": "vmess+ws+ng","add": "'${my_ip}'","port": "32023","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "auto","net": "ws","type": "none","host": "","path": "/ab596b5a5d3636b579bc0d2f000","tls": "","sni": "","alpn": ""}'
+	vmess_str='vmess://'$(echo $vmess_str | base64)
+	echo ${vmess_str}	
+
+	echo -e "\n"
+	echo -e "\e[32m*** vmess+kcp *** \e[0m"
+	echo "端口: 32024"
+	echo "用户id: af61686b-cb85-293a-a559-eeaa1510bca7"
+	echo "加密方式: auto"
+	echo "传输协议: kcp"
+	echo "kcp seed:c25785a6987d235897"
+	echo "链接:"
+	vmess_str='{"v": "2","ps": "vmess+kcp","add": "'${my_ip}'","port": "32024","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "auto","net": "kcp","type": "none","host": "","path": "c25785a6987d235897","tls": "","sni": "","alpn": ""}'
+	vmess_str='vmess://'$(echo $vmess_str | base64)
+	echo ${vmess_str}				
 	echo "============================================================"
 }
 
@@ -311,9 +376,12 @@ function print_all_inbounds() {
 	    		continue
 	    		;;
 	    7) 
-	    		cat /etc/nginx/nginx.conf
+	    		echo -e "\n\n\n\n\n\n\n\n\n\n"
+	    		print_vmess_inbounds
+	    		echo -e "\e[33m 回车键返回菜单 \e[0m\c"
+	    		read -r -p "" input
 	    		continue
-	    		;;  
+	    		;;
 	    8) 
 	    		echo -e "\n\n\n\n\n\n\n\n\n\n"
 	    		print_luodi6_inbounds
@@ -368,7 +436,17 @@ function ufw_setting() {
 	#vless+tcp+ng
 	ufw allow 32017
 	#vless+ws+ng
-	ufw allow 32018	
+	ufw allow 32018
+	#vless+kcp
+	ufw allow 32019	
+	#vmess+tcp
+	ufw allow 32020	
+	#vmess+ws
+	ufw allow 32021
+	#vmess+tcp+ng
+	ufw allow 32022
+	#vmess+ws+ng
+	ufw allow 32023
 	ufw disable
 }
 
