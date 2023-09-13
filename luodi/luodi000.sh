@@ -318,6 +318,18 @@ function print_vmess_inbounds() {
 	echo "============================================================"
 }
 
+#函数---
+function print_socks5_inbounds() {
+	echo -e "\n"
+	echo -e "\e[32m*** socks5+tcp *** (该节点端口默认关闭) \e[0m"
+	echo "端口: 32025"
+	echo "用户名: a25b03c5a01872000"
+	echo "密码: b25b63c585a0987d6"
+	echo "传输协议: tcp"
+	echo -e "\e[32m*** 该节点为经过连通测试，可能是socks明文传输被墙，为防止探测，该节点端口默认关闭 \e[0m"			
+	echo "============================================================"
+}
+
 
 #函数---显示所有节点
 function print_all_inbounds() {
@@ -326,6 +338,7 @@ function print_all_inbounds() {
 	print_ss_inbounds
 	print_vless_inbounds
 	print_vmess_inbounds
+	print_socks5_inbounds
 	print_luodi3_inbounds
 	print_luodi5_inbounds
 	print_luodi6_inbounds
@@ -351,6 +364,7 @@ function print_all_inbounds() {
 	echo "7) vmess节点"
 	echo "8) 兼容luodi6.sh节点"
 	echo "9) 兼容luodi7.sh节点"
+	echo "10) socks5节点"
 	read -r -p "请输入数字选择(直接按回车键返回上级): " input
 	case $input in
 	    0) 
@@ -365,6 +379,7 @@ function print_all_inbounds() {
     			print_ss_inbounds
 			print_vless_inbounds
 			print_vmess_inbounds
+			print_socks5_inbounds
 			print_luodi3_inbounds
 			print_luodi5_inbounds
 			print_luodi6_inbounds
@@ -430,7 +445,14 @@ function print_all_inbounds() {
 	    		echo -e "\e[33m 回车键返回菜单 \e[0m\c"
 	    		read -r -p "" input
 	    		continue
-	    		;;  	    			    		  		
+	    		;;  	 
+	    10) 
+	    		echo -e "\n\n\n\n\n\n\n\n\n\n"
+	    		print_socks5_inbounds
+	    		echo -e "\e[33m 回车键返回菜单 \e[0m\c"
+	    		read -r -p "" input
+	    		continue
+	    		;;  	    		   			    		  		
 	    *) 
 	    		#echo "invalid option...退出脚本"
 	    		#exit 1
@@ -482,6 +504,12 @@ function ufw_setting() {
 	ufw allow 32022
 	#vmess+ws+ng
 	ufw allow 32023
+	#vmess+kcp
+	ufw allow 32024
+	#socks5+tcp (安全问题，关闭端口)
+	ufw allow 32025
+	ufw delete allow 32025
+	ufw deny 32025
 	ufw disable
 }
 
