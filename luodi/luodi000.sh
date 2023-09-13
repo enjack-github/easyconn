@@ -28,39 +28,23 @@ function get_my_ip() {
  	echo -e "\n"
 }
 
-#函数---显示安装结束后的配置信息
-function print_result_info() {
-	
-	echo -e "\n"
+
+#函数---常用节点
+function print_usefull_inbounds() {
 	echo "============================================================"
-	echo "节点1--->"
-	echo "协议: "$1
-	echo "端口: 35560"
-	echo "用户id: af61686b-cb85-293a-a559-eeaa1510bca7"
-	echo "加密方式: auto"
+}
+
+#函数---动态路径节点
+function print_dynamic_path_inbounds() {
+	echo -e "\e[32m*** luodi3 vless+ws+ng 动态路径*** \e[0m"
+	echo "端口: 9900"
+	echo "用户id: af41686b-cb85-494a-a554-eeaa1514bca7"
+	echo "加密方式: none"
 	echo "传输协议: ws"
-	echo "路径: /ab596b5a5d3636b5-002"
-	echo "复制以下链接到VPN客户端"
-	vmess_str='{"v": "2","ps": "luodi7","add": "'${my_ip}'","port": "35560","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "auto","net": "ws","type": "none","host": "","path": "/ab596b5a5d3636b5-002","tls": "","sni": "","alpn": ""}'
-	vmess_str='vmess://'$(echo $vmess_str | base64)
-	echo ${vmess_str}
-
-	echo -e "\n"
-
-	echo "节点2--->"
-	echo "协议: "$1
-	echo "端口: 35570"
-	echo "用户id: af61686b-cb85-293a-a559-eeaa1510bca7"
-	echo "加密方式: auto"
-	echo "传输协议: ws"
-	echo "路径: /${ip_base64}"
-	echo "复制以下链接到VPN客户端"
-	vmess_str='{"v": "2","ps": "luodi7","add": "'${my_ip}'","port": "35570","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "auto","net": "ws","type": "none","host": "","path": "/'${ip_base64}'","tls": "","sni": "","alpn": ""}'
-	vmess_str='vmess://'$(echo $vmess_str | base64)
-	echo ${vmess_str}
-
+	echo "路径: /"$ip_base64
+	echo "链接:"
+	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9900?encryption=none&security=none&type=ws&path=%2F$ip_base64#luodi3-9900"		
 	echo "============================================================"
-	echo -e "\n\n"
 }
 
 #函数---
@@ -81,8 +65,64 @@ function print_luodi3_inbounds() {
 	echo "加密方式: none"
 	echo "传输协议: ws"
 	echo "路径: /"$ip_base64
-	echo "复制以下链接到VPN客户端"
+	echo "链接:"
 	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9900?encryption=none&security=none&type=ws&path=%2F$ip_base64#luodi3-9900"	
+	echo "============================================================"
+}
+
+#函数---
+function print_luodi5_inbounds() {
+	echo -e "\e[32m*** luodi5 vmess+tcp *** \e[0m"
+	echo "端口: 35510"
+	echo "用户id: af01686b-cb85-293a-a557-eeaa1519bca8"
+	echo "加密方式: none"
+	echo "传输协议: tcp"
+	echo "链接:"
+	vmess_str='{"v": "2","ps": "luodi5-vmess+tcp","add": "'${my_ip}'","port": "35510","id": "af01686b-cb85-293a-a557-eeaa1519bca8","aid": "0","scy": "none","net": "tcp","type": "none","host": "","path": "","tls": "","sni": "","alpn": ""}'
+	vmess_str='vmess://'$(echo $vmess_str | base64)
+	echo ${vmess_str}
+	echo "============================================================"
+}
+
+
+#函数---
+function print_luodi6_inbounds() {
+	echo -e "\e[32m*** luodi6 ss+tcp *** \e[0m"
+	echo "端口: 35520"
+	echo "密码: b25b63c585a0987d6"
+	echo "加密方式: chacha20-ietf-poly1305"
+	echo "传输协议: tcp"
+	echo "链接:"
+	ss_str='chacha20-ietf-poly1305:b25b63c585a0987d6'
+	ss_str='ss://'$(echo $ss_str | base64)"@"${my_ip}":35520#luodi6-ss+tcp"
+	echo ${ss_str}
+	echo "============================================================"
+}
+
+#函数---
+function print_luodi7_inbounds() {
+	echo -e "\e[32m*** luodi7 vmess+ws+ng *** \e[0m"
+	echo "端口: 35560"
+	echo "用户id: af61686b-cb85-293a-a559-eeaa1510bca7"
+	echo "加密方式: auto"
+	echo "传输协议: ws"
+	echo "路径: /ab596b5a5d3636b5-002"
+	echo "链接:"
+	vmess_str='{"v": "2","ps": "luodi7-vmess+ws+ng","add": "'${my_ip}'","port": "35560","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "auto","net": "ws","type": "none","host": "","path": "/ab596b5a5d3636b5-002","tls": "","sni": "","alpn": ""}'
+	vmess_str='vmess://'$(echo $vmess_str | base64)
+	echo ${vmess_str}
+
+	echo -e "\n"
+	echo -e "\e[32m*** luodi7 vmess+ws+ng 动态路径*** \e[0m"
+	echo "端口: 35570"
+	echo "用户id: af61686b-cb85-293a-a559-eeaa1510bca7"
+	echo "加密方式: auto"
+	echo "传输协议: ws"
+	echo "路径: /${ip_base64}"
+	echo "链接:"
+	vmess_str='{"v": "2","ps": "luodi7-vmess+ws+ng-path","add": "'${my_ip}'","port": "35570","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "auto","net": "ws","type": "none","host": "","path": "/'${ip_base64}'","tls": "","sni": "","alpn": ""}'
+	vmess_str='vmess://'$(echo $vmess_str | base64)
+	echo ${vmess_str}
 	echo "============================================================"
 }
 
@@ -136,6 +176,11 @@ function print_all_inbounds() {
 	print_ss_inbounds
 	print_vless_inbounds
 	print_vmess_inbounds
+	print_luodi3_inbounds
+	print_luodi5_inbounds
+	print_luodi6_inbounds
+	print_dynamic_path_inbounds
+	print_usefull_inbounds
 
 	while true
 	do
@@ -148,6 +193,8 @@ function print_all_inbounds() {
 	echo "5) ss节点"
 	echo "6) vless节点"
 	echo "7) vmess节点"
+	echo "8) 兼容luodi6.sh节点"
+	echo "9) 兼容luodi7.sh节点"
 	read -r -p "请输入数字选择: " input
 	case $input in
 	    0) 
@@ -157,7 +204,9 @@ function print_all_inbounds() {
 	    		break
 	    		;;	    		
 	    2) 
-
+			print_dynamic_path_inbounds
+	    		echo -e "\e[33m 按任意键返回选择 \e[0m\c"
+	    		read -r -p "" input			
 	    		continue
 	    		;;
 	    3) 
@@ -167,8 +216,11 @@ function print_all_inbounds() {
 	    		continue
 	    		;;    		
 	    4) 
+	    		print_luodi5_inbounds
+	    		echo -e "\e[33m 按任意键返回选择 \e[0m\c"
+	    		read -r -p "" input
 	    		continue
-	    		;;
+	    		;;   
 	    5) 
 	    		print_ss_inbounds
 	    		echo -e "\e[33m 按任意键返回选择 \e[0m\c"
@@ -182,7 +234,19 @@ function print_all_inbounds() {
 	    7) 
 	    		cat /etc/nginx/nginx.conf
 	    		continue
-	    		;;    		
+	    		;;  
+	    8) 
+	    		print_luodi6_inbounds
+	    		echo -e "\e[33m 按任意键返回选择 \e[0m\c"
+	    		read -r -p "" input
+	    		continue
+	    		;;   
+	    9) 
+	    		print_luodi7_inbounds
+	    		echo -e "\e[33m 按任意键返回选择 \e[0m\c"
+	    		read -r -p "" input
+	    		continue
+	    		;;  	    			    		  		
 	    *) 
 	    		#echo "invalid option...退出脚本"
 	    		#exit 1
@@ -197,20 +261,25 @@ function print_all_inbounds() {
 function ufw_setting() {
 	echo "设置ufw"
 	ufw allow ssh
-	#luodi3
+	#luodi3 vless+ws+ng
 	ufw allow 9800
 	ufw allow 9900
-	#luodi5
+	#luodi5 vmess+tcp
 	ufw allow 35510
-
-	#luodi7
+	#luodi6 ss+tcp
+	ufw allow 35520
+	#luodi7 vmess+ws+ng
 	ufw allow 35560
 	ufw allow 35570
 	ufw allow 80
-	
+	#ss+tcp
 	ufw allow 32011
+	#ss+ws
 	ufw allow 32012
+	#ss+tcp+ng
 	ufw allow 32013
+	#ss+ws+ng
+	ufw allow 32014
 	ufw disable
 }
 
@@ -284,7 +353,7 @@ function install_my_service() {
 	echo -e "\n\n\n"
 	echo "安装完成！！！！！！！！"
 	
-	print_result_info $protocol_choice
+	print_all_inbounds
 }
 
 
@@ -305,7 +374,7 @@ function main_menu() {
 	case $input in
 	    1) 
 	    		echo "开始安装"
-	    		get_my_ip
+	    		install_my_service
 	    		break
 	    		;;
 	    2) 
@@ -349,6 +418,5 @@ function main_menu() {
 #脚本功能选择
 main_menu
 
-protocol_choice="vmess"
 
 
