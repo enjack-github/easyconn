@@ -43,7 +43,19 @@ function print_dynamic_path_inbounds() {
 	echo "传输协议: ws"
 	echo "路径: /"$ip_base64
 	echo "链接:"
-	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9900?encryption=none&security=none&type=ws&path=%2F$ip_base64#luodi3-9900"		
+	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9900?encryption=none&security=none&type=ws&path=%2F$ip_base64#luodi3-9900"	
+
+	echo -e "\n"
+	echo -e "\e[32m*** luodi7 vmess+ws+ng 动态路径*** \e[0m"
+	echo "端口: 35570"
+	echo "用户id: af61686b-cb85-293a-a559-eeaa1510bca7"
+	echo "加密方式: auto"
+	echo "传输协议: ws"
+	echo "路径: /${ip_base64}"
+	echo "链接:"
+	vmess_str='{"v": "2","ps": "luodi7-vmess+ws+ng-path","add": "'${my_ip}'","port": "35570","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "auto","net": "ws","type": "none","host": "","path": "/'${ip_base64}'","tls": "","sni": "","alpn": ""}'
+	vmess_str='vmess://'$(echo $vmess_str | base64)
+	echo ${vmess_str}		
 	echo "============================================================"
 }
 
@@ -151,14 +163,68 @@ function print_ss_inbounds() {
 	echo ${ss_str}		
 
 	echo -e "\n"
-	echo "*** ss+tcp+ng *** (暂时不可用)"
-	echo "*** ss+ws+ng *** (暂时不可用)"
+	echo -e "\e[32m*** ss+tcp+ng *** \e[0m"
+	echo "端口: 32013"
+	echo "密码: b25b63c585a0987d6"
+	echo "加密方式: chacha20-ietf-poly1305"
+	echo "传输协议: tcp"
+	echo "链接:"
+	ss_str='chacha20-ietf-poly1305:b25b63c585a0987d6'
+	ss_str='ss://'$(echo $ss_str | base64)"@"${my_ip}":32013#ss+tcp+ng"
+	echo ${ss_str}	
+	
+	echo -e "\n"
+	echo -e "\e[32m*** ss+ws+ng *** (由于ss链接不带传输协议等参数，该链接复制到客户端后需要再手动选择ws和路径) \e[0m"
+	echo "端口: 32014"
+	echo "密码: b25b63c585a0987d6"
+	echo "加密方式: chacha20-ietf-poly1305"
+	echo "传输协议: ws"
+	echo "路径: /ab596b5a5d3636b579bc0d2f000"
+	echo "链接:"
+	ss_str='chacha20-ietf-poly1305:b25b63c585a0987d6'
+	ss_str='ss://'$(echo $ss_str | base64)"@"${my_ip}":32014#ss+ws+ng"
+	echo ${ss_str}	
 	echo "============================================================"
 }
 
 #函数---
 function print_vless_inbounds() {
+	echo -e "\e[32m*** vless+tcp *** \e[0m"
+	echo "端口: 32015"
+	echo "用户id: af61686b-cb85-293a-a559-eeaa1510bca7"
+	echo "加密方式: none"
+	echo "传输协议: tcp"
+	echo "链接:"
+	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32015?encryption=none&security=none&type=tcp#vless+tcp"	
 
+	echo -e "\n"
+	echo -e "\e[32m*** vless+ws *** \e[0m"
+	echo "端口: 32016"
+	echo "用户id: af61686b-cb85-293a-a559-eeaa1510bca7"
+	echo "加密方式: none"
+	echo "传输协议: ws"
+	echo "路径: /ab596b5a5d3636b579bc0d2f000"
+	echo "链接:"
+	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32016?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b579bc0d2f000#vless+ws"	
+
+	echo -e "\n"
+	echo -e "\e[32m*** vless+tcp+ng *** \e[0m"
+	echo "端口: 32017"
+	echo "用户id: af61686b-cb85-293a-a559-eeaa1510bca7"
+	echo "加密方式: none"
+	echo "传输协议: tcp"
+	echo "链接:"
+	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32017?encryption=none&security=none&type=tcp#vless+tcp+ng"
+
+	echo -e "\n"
+	echo -e "\e[32m*** vless+ws+ng *** \e[0m"
+	echo "端口: 32018"
+	echo "用户id: af61686b-cb85-293a-a559-eeaa1510bca7"
+	echo "加密方式: none"
+	echo "传输协议: ws"
+	echo "路径: /ab596b5a5d3636b579bc0d2f000"
+	echo "链接:"
+	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32018?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b579bc0d2f000#vless+ws+ng"				
 	echo "============================================================"
 }
 
@@ -179,8 +245,14 @@ function print_all_inbounds() {
 	print_luodi3_inbounds
 	print_luodi5_inbounds
 	print_luodi6_inbounds
+	print_luodi7_inbounds
 	print_dynamic_path_inbounds
 	print_usefull_inbounds
+
+	if [[ $1 == "install_finish" ]];then
+		echo -e "\n安装完成！！！！！！！！\n"
+		exit 0
+	fi	
 
 	while true
 	do
@@ -195,7 +267,7 @@ function print_all_inbounds() {
 	echo "7) vmess节点"
 	echo "8) 兼容luodi6.sh节点"
 	echo "9) 兼容luodi7.sh节点"
-	read -r -p "请输入数字选择: " input
+	read -r -p "请输入数字选择(直接按回车键返回上级): " input
 	case $input in
 	    0) 
 	    		break
@@ -204,31 +276,38 @@ function print_all_inbounds() {
 	    		break
 	    		;;	    		
 	    2) 
+	    		echo -e "\n\n\n\n\n\n\n\n\n\n"
 			print_dynamic_path_inbounds
-	    		echo -e "\e[33m 按任意键返回选择 \e[0m\c"
+	    		echo -e "\e[33m 回车键返回菜单 \e[0m\c"
 	    		read -r -p "" input			
 	    		continue
 	    		;;
 	    3) 
+	    		echo -e "\n\n\n\n\n\n\n\n\n\n"
 	    		print_luodi3_inbounds
-	    		echo -e "\e[33m 按任意键返回选择 \e[0m\c"
+	    		echo -e "\e[33m 回车键返回菜单 \e[0m\c"
 	    		read -r -p "" input
 	    		continue
 	    		;;    		
 	    4) 
+	    		echo -e "\n\n\n\n\n\n\n\n\n\n"
 	    		print_luodi5_inbounds
-	    		echo -e "\e[33m 按任意键返回选择 \e[0m\c"
+	    		echo -e "\e[33m 回车键返回菜单 \e[0m\c"
 	    		read -r -p "" input
 	    		continue
 	    		;;   
 	    5) 
+	    		echo -e "\n\n\n\n\n\n\n\n\n\n"
 	    		print_ss_inbounds
-	    		echo -e "\e[33m 按任意键返回选择 \e[0m\c"
+	    		echo -e "\e[33m 回车键返回菜单 \e[0m\c"
 	    		read -r -p "" input
 	    		continue
 	    		;;
 	    6) 
-	    		systemctl status nginx
+	    		echo -e "\n\n\n\n\n\n\n\n\n\n"
+	    		print_vless_inbounds
+	    		echo -e "\e[33m 回车键返回菜单 \e[0m\c"
+	    		read -r -p "" input
 	    		continue
 	    		;;
 	    7) 
@@ -236,14 +315,16 @@ function print_all_inbounds() {
 	    		continue
 	    		;;  
 	    8) 
+	    		echo -e "\n\n\n\n\n\n\n\n\n\n"
 	    		print_luodi6_inbounds
-	    		echo -e "\e[33m 按任意键返回选择 \e[0m\c"
+	    		echo -e "\e[33m 回车键返回菜单 \e[0m\c"
 	    		read -r -p "" input
 	    		continue
 	    		;;   
 	    9) 
+	    		echo -e "\n\n\n\n\n\n\n\n\n\n"
 	    		print_luodi7_inbounds
-	    		echo -e "\e[33m 按任意键返回选择 \e[0m\c"
+	    		echo -e "\e[33m 回车键返回菜单 \e[0m\c"
 	    		read -r -p "" input
 	    		continue
 	    		;;  	    			    		  		
@@ -280,6 +361,14 @@ function ufw_setting() {
 	ufw allow 32013
 	#ss+ws+ng
 	ufw allow 32014
+	#vless+tcp
+	ufw allow 32015
+	#vless+ws
+	ufw allow 32016
+	#vless+tcp+ng
+	ufw allow 32017
+	#vless+ws+ng
+	ufw allow 32018	
 	ufw disable
 }
 
@@ -312,12 +401,14 @@ function install_my_service() {
 	
 	echo "安装v2ray"
 	./v2ray-install-release.sh
+	rm v2ray-install-release.sh
 	
 	echo "下载v2ray.service文件"
 	wget -O v2ray.service https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/v2ray/config/v2ray.service
 	rm /etc/systemd/system/v2ray.service
 	cp v2ray.service /etc/systemd/system/v2ray.service
 	systemctl daemon-reload
+	rm v2ray.service
 	
 	echo "下载节点配置文件"
 	rm jiedian.json
@@ -338,6 +429,7 @@ function install_my_service() {
 	chmod 777 /etc/nginx/nginx.conf
 	#用当前ip的base64编码，作为ws路径
 	sed -i "s/replace-with-you-path/$ip_base64/g" /etc/nginx/nginx.conf
+	rm nginx.conf
 	
 	#启用bbr
 	echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf && echo "net.ipv4.tcp_congestion_control= bbr" >> /etc/sysctl.conf&& sysctl -p
@@ -353,12 +445,16 @@ function install_my_service() {
 	echo -e "\n\n\n"
 	echo "安装完成！！！！！！！！"
 	
-	print_all_inbounds
+	print_all_inbounds "install_finish"
 }
 
 
 #函数---主菜单
 function main_menu() {
+	rm tools.sh
+	cp luodi000.sh tools.sh
+	chmod 777 tools.sh
+	
 	while true
 	do
 	echo -e "\e[33m\n【一键脚本合集】luodi000 \e[0m"
@@ -370,7 +466,7 @@ function main_menu() {
 	echo "5) 查看v2ray配置文件"
 	echo "6) 查看nginx运行状态"
 	echo "7) 查看nginx配置文件"
-	read -r -p "请输入数字选择: " input
+	read -r -p "请输入数字选择(直接按回车键退出脚本): " input
 	case $input in
 	    1) 
 	    		echo "开始安装"
