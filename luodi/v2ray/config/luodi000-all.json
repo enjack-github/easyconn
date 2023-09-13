@@ -1,0 +1,134 @@
+#my_name_is:luodi000
+{
+    "log": {
+        "loglevel": "warning"
+    },
+    "inbounds": [
+#---luodi3----------------------------------------------------------------------------------  
+        {
+            "port": 9801,
+            "listen": "127.0.0.1",
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "af41686b-cb85-494a-a554-eeaa1514bca7", 
+                        "level": 0,
+                        "email": "justafake@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "none",
+                "wsSettings": {
+                    "path": "/ab596b5a5d3636b5-002" 
+                }
+            }
+        },
+
+        
+         {
+            "port": 9802,
+            "listen": "127.0.0.1",
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "af41686b-cb85-494a-a554-eeaa1514bca7", 
+                        "level": 0,
+                        "email": "justafake@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "none",
+                "wsSettings": {
+                    "path": "/replace-with-you-path" 
+                }
+            }
+        }, 	
+#---ss----------------------------------------------------------------------------------    
+	#ss+tcp	
+        {
+            "listen": "0.0.0.0",
+            "port": 32011,
+            "protocol": "shadowsocks",
+            "settings": {
+                "method": "chacha20-ietf-poly1305",
+                "password": "b25b63c585a0987d6"
+            },
+            "streamSettings": {
+                "network": "tcp"
+            }
+        },
+
+	#ss+ws	
+        {
+            "listen": "0.0.0.0",
+            "port": 32012,
+            "protocol": "shadowsocks",
+            "settings": {
+                "method": "chacha20-ietf-poly1305",
+                "password": "b25b63c585a0987d6"
+            },
+            "streamSettings": {
+                "network": "ws",
+                "wsSettings": {
+                    "path": "/ab596b5a5d3636b579bc0d2f000" 
+                }
+            }
+        },        
+            	
+        {
+            "port": 9801,
+            "listen": "127.0.0.1",
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "af61686b-cb85-293a-a559-eeaa1510bca7",
+                        "alterId": 0
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "auto",
+                "wsSettings": {
+                    "path": "/ab596b5a5d3636b5-002" 
+                }
+            }
+        },
+
+        
+         {
+            "port": 9802,
+            "listen": "127.0.0.1",
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "af61686b-cb85-293a-a559-eeaa1510bca7", 
+                         "alterId": 0
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "auto",
+                "wsSettings": {
+                    "path": "/OTEuMTQ5LjI1My4xNDUK" 
+                }
+            }
+        }         
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom"
+        }
+    ]
+}
