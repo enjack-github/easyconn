@@ -199,10 +199,91 @@
                     "path": "/ab596b5a5d3636b579bc0d2f000" 
                 }
             }
-        }	       
-              
+        },	       
 
-
+	#vless+kcp
+        {
+            "port": 32019,
+            "listen": "0.0.0.0",
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "af61686b-cb85-293a-a559-eeaa1510bca7", 
+                        "level": 0,
+                        "email": "justafake@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "kcp",
+                "kcpSettings": {
+                    "seed": "c25785a6987d235897"
+                }
+            }
+        },	               
+#---vmess----------------------------------------------------------------------------------
+	#vmess+tcp
+        {
+            "listen": "0.0.0.0",
+            "port": 32020,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "af61686b-cb85-293a-a559-eeaa1510bca7",
+                        "alterId": 0
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp"
+            }
+        },
+        
+	#vmess+ws
+         {
+            "port": 32021,
+            "listen": "0.0.0.0",
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "af61686b-cb85-293a-a559-eeaa1510bca7", 
+                         "alterId": 0
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "auto",
+                "wsSettings": {
+                    "path": "/ab596b5a5d3636b579bc0d2f000" 
+                }
+            }
+        },   
+        
+	#vmess+kcp
+        {
+            "protocol": "vmess",
+            "port": "32024",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "af61686b-cb85-293a-a559-eeaa1510bca7", 
+                         "alterId": 0
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "kcp",
+                "security": "auto",
+                "kcpSettings": {
+                    "seed": "c25785a6987d235897"
+                }
+            }
+        }               
 
 
 
