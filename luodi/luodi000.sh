@@ -31,6 +31,25 @@ function get_my_ip() {
 
 #函数---常用节点
 function print_usefull_inbounds() {
+	echo -e "\e[32m*** luodi3 vless+ws+ng *** \e[0m"
+	echo "端口: 9800"
+	echo "用户id: af41686b-cb85-494a-a554-eeaa1514bca7"
+	echo "加密方式: none"
+	echo "传输协议: ws"
+	echo "路径: /ab596b5a5d3636b5-002"
+	echo "链接:"
+	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9800?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b5-002#luodi3-9800"	
+
+	echo -e "\n"
+	echo -e "\e[32m*** vmess+tcp *** \e[0m"
+	echo "端口: 32020"
+	echo "用户id: af61686b-cb85-293a-a559-eeaa1510bca7"
+	echo "加密方式: none"
+	echo "传输协议: tcp"
+	echo "链接:"
+	vmess_str='{"v": "2","ps": "vmess+tcp","add": "'${my_ip}'","port": "32020","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "none","net": "tcp","type": "none","host": "","path": "","tls": "","sni": "","alpn": ""}'
+	vmess_str='vmess://'$(echo $vmess_str | base64)
+	echo ${vmess_str}
 	echo "============================================================"
 }
 
@@ -335,10 +354,26 @@ function print_all_inbounds() {
 	read -r -p "请输入数字选择(直接按回车键返回上级): " input
 	case $input in
 	    0) 
-	    		break
+	    		echo -e "\n\n\n\n\n\n\n\n\n\n"
+	    		print_usefull_inbounds
+	    		echo -e "\e[33m 回车键返回菜单 \e[0m\c"
+	    		read -r -p "" input			
+	    		continue
 	    		;;
 	    1) 
-	    		break
+	    		echo -e "\n\n\n\n\n\n\n\n\n\n"
+    			print_ss_inbounds
+			print_vless_inbounds
+			print_vmess_inbounds
+			print_luodi3_inbounds
+			print_luodi5_inbounds
+			print_luodi6_inbounds
+			print_luodi7_inbounds
+			print_dynamic_path_inbounds
+			print_usefull_inbounds
+	    		echo -e "\e[33m 回车键返回菜单 \e[0m\c"
+	    		read -r -p "" input			
+	    		continue
 	    		;;	    		
 	    2) 
 	    		echo -e "\n\n\n\n\n\n\n\n\n\n"
