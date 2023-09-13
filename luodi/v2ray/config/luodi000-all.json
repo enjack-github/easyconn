@@ -283,7 +283,27 @@
                     "seed": "c25785a6987d235897"
                 }
             }
-        }               
+        },  
+#---socks5----------------------------------------------------------------------------------
+        {
+            "listen": "0.0.0.0",
+            "port": 32025,
+            "protocol": "socks",
+            "settings": {
+                "auth": "b25b63c585a0987d6",
+                "accounts": [
+                    {
+                        "user": "a25b03c5a01872000",
+                        "pass": "b25b63c585a0987d6"
+                    }
+                ],
+                "udp": true
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "none"
+            }
+        }                  
 
 
 
