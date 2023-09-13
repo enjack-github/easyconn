@@ -63,6 +63,29 @@ function print_result_info() {
 	echo -e "\n\n"
 }
 
+#函数---
+function print_luodi3_inbounds() {
+	echo -e "\e[32m*** luodi3 vless+ws+ng *** \e[0m"
+	echo "端口: 9800"
+	echo "用户id: af41686b-cb85-494a-a554-eeaa1514bca7"
+	echo "加密方式: none"
+	echo "传输协议: ws"
+	echo "路径: /ab596b5a5d3636b5-002"
+	echo "链接:"
+	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9800?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b5-002#luodi3-9800"	
+
+	echo -e "\n"
+	echo -e "\e[32m*** luodi3 vless+ws+ng 动态路径*** \e[0m"
+	echo "端口: 9900"
+	echo "用户id: af41686b-cb85-494a-a554-eeaa1514bca7"
+	echo "加密方式: none"
+	echo "传输协议: ws"
+	echo "路径: /"$ip_base64
+	echo "复制以下链接到VPN客户端"
+	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9900?encryption=none&security=none&type=ws&path=%2F$ip_base64#luodi3-9900"	
+	echo "============================================================"
+}
+
 #函数---显示ss节点
 function print_ss_inbounds() {
 	echo -e "\e[32m*** ss+tcp *** \e[0m"
@@ -138,6 +161,9 @@ function print_all_inbounds() {
 	    		continue
 	    		;;
 	    3) 
+	    		print_luodi3_inbounds
+	    		echo -e "\e[33m 按任意键返回选择 \e[0m\c"
+	    		read -r -p "" input
 	    		continue
 	    		;;    		
 	    4) 
@@ -167,6 +193,28 @@ function print_all_inbounds() {
 }
 
 
+#函数---ufw设置
+function ufw_setting() {
+	echo "设置ufw"
+	ufw allow ssh
+	#luodi3
+	ufw allow 9800
+	ufw allow 9900
+	#luodi5
+	ufw allow 35510
+
+	#luodi7
+	ufw allow 35560
+	ufw allow 35570
+	ufw allow 80
+	
+	ufw allow 32011
+	ufw allow 32012
+	ufw allow 32013
+	ufw disable
+}
+
+
 #函数---安装节点
 function install_my_service() {
 	#echo "安装依赖包"
@@ -181,18 +229,6 @@ function install_my_service() {
 	#获取ip
 	my_ip="1.2.2.2"
 	get_my_ip
-	
-	#防火墙设置
-	echo "设置ufw"
-	ufw allow ssh
-	ufw allow 35560
-	ufw allow 35570
-	ufw allow 80
-	
-	ufw allow 32011
-	ufw allow 32012
-	ufw allow 32013
-	ufw disable
 	
 	echo "下载v2ray安装脚本"
 	rm v2ray-install-release.sh
@@ -216,7 +252,7 @@ function install_my_service() {
 	
 	echo "下载节点配置文件"
 	rm jiedian.json
-	wget -O jiedian.json https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/v2ray/config/luodi7-vmess-ws.json
+	wget -O jiedian.json https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/v2ray/config/luodi000-all.json
 	rm /usr/local/etc/v2ray/config.json
 	cp jiedian.json /usr/local/etc/v2ray/config.json
 	#用当前ip的base64编码，作为ws路径
@@ -227,7 +263,7 @@ function install_my_service() {
 	
 	echo "下载nginx配置文件"
 	rm nginx.conf
-	wget -O nginx.conf https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/nginx/nginx7.conf
+	wget -O nginx.conf https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/nginx/nginx000.conf
 	rm /etc/nginx/nginx.conf
 	cp nginx.conf /etc/nginx/nginx.conf
 	chmod 777 /etc/nginx/nginx.conf
