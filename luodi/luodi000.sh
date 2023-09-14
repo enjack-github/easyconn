@@ -637,7 +637,7 @@ function main_menu() {
 	    3) 
 	    		systemctl restart v2ray
 	    		systemctl restart nginx
-	    		echo "服务已重启"
+	    		echo -e "\e[1;36m\n服务已重启\e[0m"
 	    		continue
 	    		;;    		
 	    4) 
