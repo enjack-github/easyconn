@@ -347,7 +347,8 @@ function print_all_inbounds() {
 	print_usefull_inbounds
 
 	if [[ $1 == "install_finish" ]];then
-		echo -e "\n安装完成！！！！！！！！\n"
+		echo -e "\e[34;46m 防火墙已激活 \e[0m"
+		echo -e "\e[33;40m 安装完成！！！！！！！！\e[0m 再次运行脚本选择2查看各个节点"
 		exit 0
 	fi	
 
@@ -492,6 +493,7 @@ function ufw_setting() {
 	ufw allow 32016
 	#vless+tcp+ng
 	ufw allow 32017
+	
 	#vless+ws+ng
 	ufw allow 32018
 	#vless+kcp
@@ -500,17 +502,19 @@ function ufw_setting() {
 	ufw allow 32020	
 	#vmess+ws
 	ufw allow 32021
+	
 	#vmess+tcp+ng
 	ufw allow 32022
 	#vmess+ws+ng
 	ufw allow 32023
 	#vmess+kcp
 	ufw allow 32024
-	#socks5+tcp (安全问题，关闭端口)
-	ufw allow 32025
+	#socks5+tcp (安全问题，关闭端口)	
 	ufw delete allow 32025
 	ufw deny 32025
-	ufw disable
+	
+	echo -e "\e[31;46m准备开启防火墙...  Attemp to enable ufw \e[0m"
+	sudo ufw enable
 }
 
 
@@ -583,8 +587,7 @@ function install_my_service() {
 	sudo systemctl enable v2ray.service
 	sudo systemctl enable nginx.service
 	
-	echo -e "\n\n\n"
-	echo "安装完成！！！！！！！！"
+	ufw_setting
 	
 	print_all_inbounds "install_finish"
 }
