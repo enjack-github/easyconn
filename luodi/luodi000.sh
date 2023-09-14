@@ -595,6 +595,13 @@ function install_my_service() {
 
 #函数---主菜单
 function main_menu() {
+	if [[ $(dpkg --get-selections | grep cowsay) =~ "install" ]];then
+	    cowsay "All you own is none"
+	else
+	    apt install -y cowsay
+	    cowsay "All you own is none" 
+	fi
+	
 	rm tools.sh
 	cp luodi000.sh tools.sh
 	chmod 777 tools.sh
