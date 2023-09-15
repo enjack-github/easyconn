@@ -520,12 +520,21 @@ function ufw_setting() {
 
 #函数---安装节点
 function install_my_service() {
+	#判断是否首次运行，首次则安装依赖包
+	if [ -f "/root/.first_run_luodi_script" ];then
+		echo "tag file exist, do not need install tools"
+	else 
+		echo "首次运行,安装工具依赖"
+		apt update -y && apt install -y netcat && apt install -y net-tools && apt install -y curl && apt install -y socat && apt install -y wget && apt install -y unzip && apt install -y ufw
+		touch /root/.first_run_luodi_script
+	fi
+	
 	#echo "安装依赖包"
 	#apt update -y && apt install -y netcat && apt install -y net-tools && apt install -y curl && apt install -y socat && apt install -y wget && apt install -y unzip && apt install -y ufw
-	apt update -y
+	#apt update -y
 	
 	#安装curl
-	apt install -y curl
+	#apt install -y curl
 	
 	wget -O checksh.sh https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/checksh.sh
 	
