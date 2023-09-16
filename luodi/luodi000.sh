@@ -385,7 +385,11 @@ function print_all_inbounds() {
 	print_usefull_inbounds
 
 	if [[ $1 == "install_finish" ]];then
-		echo -e "\e[34;46m 防火墙已激活 \e[0m"
+		if [[ $(ufw status) =~ "inactive" ]];then
+			echo -e "ufw未激活"
+		else
+			echo -e "\e[34;46m 防火墙已激活 \e[0m"
+		fi
 		echo -e "\e[33;40m 安装完成！！！！！！！！\e[0m 再次运行脚本选择2查看各个节点"
 		exit 0
 	fi	
@@ -598,6 +602,7 @@ function install_my_service() {
 	get_my_ip
 
 	#自签证书
+	echo "安装自签证书"
 	mkdir /root/ssl
 	mkdir /root/ssl/self
 	openssl ecparam -genkey -name prime256v1 -out /root/ssl/self/ca.key
