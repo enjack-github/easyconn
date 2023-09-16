@@ -572,7 +572,7 @@ function ufw_setting() {
 	#trojan+ws+tls
 	ufw allow 32029
 	
-	echo -e "\e[31;46m准备开启防火墙...  Attemp to enable ufw \e[0m"
+	echo -e "\e[31;46m准备开启防火墙...  Attemp to enable ufw \e[0m   选择y打开ufw, 选择n保持现状"
 	sudo ufw enable
 }
 
