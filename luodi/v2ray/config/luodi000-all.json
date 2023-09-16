@@ -303,11 +303,67 @@
                 "network": "tcp",
                 "security": "none"
             }
-        }                  
-
-
-
-
+        },                  
+#---trojan----------------------------------------------------------------------------------
+	#trojan+tls
+        {
+            "port": 32028,
+            "protocol": "trojan",
+            "settings": {
+                "clients": [
+                    {
+                        "password":"b25b63c585a0987d6",
+                        "email": "justafake@v2fly.org"
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "tls",
+                "tlsSettings": {
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/root/ssl/self/ca.crt",
+                            "keyFile": "/root/ssl/self/ca.key"
+                        }
+                    ]
+                }
+            }
+        },        
+	#trojan+ws+tls
+        {
+            "port": 32029,
+            "protocol": "trojan",
+            "settings": {
+                "clients": [
+                    {
+                        "password":"b25b63c585a0987d6",
+                        "email": "justafake@v2fly.org"
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "tls",
+                "tlsSettings": {
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/root/ssl/self/ca.crt",
+                            "keyFile": "/root/ssl/self/ca.key"
+                        }
+                    ]
+                },
+                "wsSettings": {
+                    "path": "/ab596b5a5d3636b579bc0d2f000" 
+                }
+            }
+        }
 
 
 
