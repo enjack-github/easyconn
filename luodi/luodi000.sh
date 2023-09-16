@@ -31,7 +31,7 @@ function get_my_ip() {
 
 #函数---常用节点
 function print_usefull_inbounds() {
-	echo -e "\e[32m*** luodi3 vless+ws+ng *** \e[0m"
+	echo -e "\e[32m*** luodi3 vless+ws+ng *** \e[0m     (适合直连)"
 	echo "端口: 9800"
 	echo "用户id: af41686b-cb85-494a-a554-eeaa1514bca7"
 	echo "加密方式: none"
@@ -41,7 +41,7 @@ function print_usefull_inbounds() {
 	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9800?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b5-002#luodi3-9800"	
 
 	echo -e "\n"
-	echo -e "\e[32m*** vmess+tcp *** \e[0m"
+	echo -e "\e[32m*** vmess+tcp *** \e[0m     (适合上中转)"
 	echo "端口: 32020"
 	echo "用户id: af61686b-cb85-293a-a559-eeaa1510bca7"
 	echo "加密方式: none"
@@ -305,14 +305,26 @@ function print_vmess_inbounds() {
 	echo ${vmess_str}	
 
 	echo -e "\n"
-	echo -e "\e[32m*** vmess+kcp *** \e[0m"
+	echo -e "\e[32m*** vmess+kcp(易被墙) *** \e[0m"
 	echo "端口: 32024"
 	echo "用户id: af61686b-cb85-293a-a559-eeaa1510bca7"
 	echo "加密方式: auto"
 	echo "传输协议: kcp"
 	echo "kcp seed:c25785a6987d235897"
 	echo "链接:"
-	vmess_str='{"v": "2","ps": "vmess+kcp","add": "'${my_ip}'","port": "32024","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "auto","net": "kcp","type": "none","host": "","path": "c25785a6987d235897","tls": "","sni": "","alpn": ""}'
+	vmess_str='{"v": "2","ps": "*vmess+kcp","add": "'${my_ip}'","port": "32024","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "auto","net": "kcp","type": "none","host": "","path": "c25785a6987d235897","tls": "","sni": "","alpn": ""}'
+	vmess_str='vmess://'$(echo $vmess_str | base64)
+	echo ${vmess_str}	
+
+	echo -e "\n"
+	echo -e "\e[32m*** vmess+kcp+ng *** \e[0m"
+	echo "端口: 32027"
+	echo "用户id: af61686b-cb85-293a-a559-eeaa1510bca7"
+	echo "加密方式: auto"
+	echo "传输协议: kcp"
+	echo "kcp seed:c25785a6987d235897"
+	echo "链接:"
+	vmess_str='{"v": "2","ps": "vmess+kcp+ng","add": "'${my_ip}'","port": "32027","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "auto","net": "kcp","type": "none","host": "","path": "c25785a6987d235897","tls": "","sni": "","alpn": ""}'
 	vmess_str='vmess://'$(echo $vmess_str | base64)
 	echo ${vmess_str}				
 	echo "============================================================"
@@ -512,6 +524,10 @@ function ufw_setting() {
 	#socks5+tcp (安全问题，关闭端口)	
 	ufw delete allow 32025
 	ufw deny 32025
+	#hysteria(大流量会被墙)
+	ufw allow 32026
+	#vmess+kcp+ng
+	ufw allow 32027
 	
 	echo -e "\e[31;46m准备开启防火墙...  Attemp to enable ufw \e[0m"
 	sudo ufw enable
