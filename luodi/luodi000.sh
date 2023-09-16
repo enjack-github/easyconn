@@ -342,6 +342,31 @@ function print_socks5_inbounds() {
 	echo "============================================================"
 }
 
+#函数---
+function print_trojan_inbounds() {
+	echo -e "\n"
+	echo -e "\e[32m*** trojan+tls *** \e[0m(记得手动设置跳过证书验证为true, 链接中不带此参数)"
+	echo "端口: 32028"
+	echo "密码: b25b63c585a0987d6"
+	echo "传输协议: tcp"
+	echo "跳过证书验证: true"
+	echo "alpn: http 1.1"
+	echo "链接:"
+	echo "trojan://b25b63c585a0987d6@"${my_ip}":32028?security=tls&alpn=http%2F1.1&type=tcp&headerType=none#trojan%2Btls%2B%E8%87%AA%E7%AD%BE%E8%AF%81%E4%B9%A6"	
+
+	echo -e "\n"
+	echo -e "\e[32m*** trojan+ws+tls *** \e[0m(记得手动设置跳过证书验证为true, 链接中不带此参数)"
+	echo "端口: 32029"
+	echo "密码: b25b63c585a0987d6"
+	echo "传输协议: ws"
+	echo "路径: /ab596b5a5d3636b579bc0d2f000"
+	echo "跳过证书验证: true"
+	echo "alpn: http 1.1"
+	echo "链接:"
+	echo "trojan://b25b63c585a0987d6@"${my_ip}":32029?security=tls&alpn=http%2F1.1&type=ws&path=%2Fab596b5a5d3636b579bc0d2f000#trojan%2Bws%2Btls%2B%E8%87%AA%E7%AD%BE%E8%AF%81%E4%B9%A6"				
+	echo "============================================================"
+}
+
 
 #函数---显示所有节点
 function print_all_inbounds() {
@@ -351,6 +376,7 @@ function print_all_inbounds() {
 	print_vless_inbounds
 	print_vmess_inbounds
 	print_socks5_inbounds
+	print_trojan_inbounds
 	print_luodi3_inbounds
 	print_luodi5_inbounds
 	print_luodi6_inbounds
@@ -378,6 +404,7 @@ function print_all_inbounds() {
 	echo "8) 兼容luodi6.sh节点"
 	echo "9) 兼容luodi7.sh节点"
 	echo "10) socks5节点"
+	echo "11) trojan节点"	
 	read -r -p "请输入数字选择(直接按回车键返回上级): " input
 	case $input in
 	    0) 
@@ -393,6 +420,7 @@ function print_all_inbounds() {
 			print_vless_inbounds
 			print_vmess_inbounds
 			print_socks5_inbounds
+			print_trojan_inbounds
 			print_luodi3_inbounds
 			print_luodi5_inbounds
 			print_luodi6_inbounds
@@ -465,7 +493,14 @@ function print_all_inbounds() {
 	    		echo -e "\e[33m 回车键返回菜单 \e[0m\c"
 	    		read -r -p "" input
 	    		continue
-	    		;;  	    		   			    		  		
+	    		;;  	 
+	    11) 
+	    		echo -e "\n\n\n\n\n\n\n\n\n\n"
+	    		print_trojan_inbounds
+	    		echo -e "\e[33m 回车键返回菜单 \e[0m\c"
+	    		read -r -p "" input
+	    		continue
+	    		;;  	    		   		   			    		  		
 	    *) 
 	    		#echo "invalid option...退出脚本"
 	    		#exit 1
@@ -528,6 +563,10 @@ function ufw_setting() {
 	ufw allow 32026
 	#vmess+kcp+ng
 	ufw allow 32027
+	#trojan+tls
+	ufw allow 32028
+	#trojan+ws+tls
+	ufw allow 32029
 	
 	echo -e "\e[31;46m准备开启防火墙...  Attemp to enable ufw \e[0m"
 	sudo ufw enable
@@ -557,6 +596,14 @@ function install_my_service() {
 	#获取ip
 	my_ip="1.2.2.2"
 	get_my_ip
+
+	#自签证书
+	mkdir /root/ssl
+	mkdir /root/ssl/self
+	openssl ecparam -genkey -name prime256v1 -out /root/ssl/self/ca.key
+	openssl req -new -x509 -days 36500 -key /root/ssl/self/ca.key -out /root/ssl/self/ca.crt  -subj "/CN=bing.com"
+	chmod 777 /root/ssl/self/ca.key
+	chmod 777 /root/ssl/self/ca.crt
 	
 	echo "下载v2ray安装脚本"
 	rm v2ray-install-release.sh
