@@ -88,6 +88,7 @@ function print_luodi3_inbounds() {
 	echo "路径: /ab596b5a5d3636b5-002"
 	echo "链接:"
 	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9800?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b5-002#luodi3-9800"	
+	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9800?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b5-002#luodi3-9800"	>> allinbounds.txt
 
 	echo -e "\n"
 	echo -e "\e[32m*** luodi3 vless+ws+ng 动态路径*** \e[0m"
@@ -97,7 +98,8 @@ function print_luodi3_inbounds() {
 	echo "传输协议: ws"
 	echo "路径: /"$ip_base64
 	echo "链接:"
-	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9900?encryption=none&security=none&type=ws&path=%2F$ip_base64#luodi3-9900"	
+	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9900?encryption=none&security=none&type=ws&path=%2F$ip_base64#luodi3-9900"
+	echo "vless://af41686b-cb85-494a-a554-eeaa1514bca7@"${my_ip}":9900?encryption=none&security=none&type=ws&path=%2F$ip_base64#luodi3-9900"		>> allinbounds.txt
 	echo "============================================================"
 }
 
@@ -112,6 +114,7 @@ function print_luodi5_inbounds() {
 	vmess_str='{"v": "2","ps": "luodi5-vmess+tcp","add": "'${my_ip}'","port": "35510","id": "af01686b-cb85-293a-a557-eeaa1519bca8","aid": "0","scy": "none","net": "tcp","type": "none","host": "","path": "","tls": "","sni": "","alpn": ""}'
 	vmess_str='vmess://'$(echo $vmess_str | base64)
 	echo ${vmess_str}
+	echo ${vmess_str} >> allinbounds.txt
 	echo "============================================================"
 }
 
@@ -127,6 +130,7 @@ function print_luodi6_inbounds() {
 	ss_str='chacha20-ietf-poly1305:b25b63c585a0987d6'
 	ss_str='ss://'$(echo $ss_str | base64)"@"${my_ip}":35520#luodi6-ss+tcp"
 	echo ${ss_str}
+	echo ${ss_str} >> allinbounds.txt
 	echo "============================================================"
 }
 
@@ -142,6 +146,7 @@ function print_luodi7_inbounds() {
 	vmess_str='{"v": "2","ps": "luodi7-vmess+ws+ng","add": "'${my_ip}'","port": "35560","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "auto","net": "ws","type": "none","host": "","path": "/ab596b5a5d3636b5-002","tls": "","sni": "","alpn": ""}'
 	vmess_str='vmess://'$(echo $vmess_str | base64)
 	echo ${vmess_str}
+	echo ${vmess_str} >> allinbounds.txt
 
 	echo -e "\n"
 	echo -e "\e[32m*** luodi7 vmess+ws+ng 动态路径*** \e[0m"
@@ -154,6 +159,7 @@ function print_luodi7_inbounds() {
 	vmess_str='{"v": "2","ps": "luodi7-vmess+ws+ng-path","add": "'${my_ip}'","port": "35570","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "auto","net": "ws","type": "none","host": "","path": "/'${ip_base64}'","tls": "","sni": "","alpn": ""}'
 	vmess_str='vmess://'$(echo $vmess_str | base64)
 	echo ${vmess_str}
+	echo ${vmess_str} >> allinbounds.txt
 	echo "============================================================"
 }
 
@@ -168,6 +174,7 @@ function print_ss_inbounds() {
 	ss_str='chacha20-ietf-poly1305:b25b63c585a0987d6'
 	ss_str='ss://'$(echo $ss_str | base64)"@"${my_ip}":32011#ss+tcp"
 	echo ${ss_str}	
+	echo ${ss_str}	>> allinbounds.txt
 
 	echo -e "\n"
 	echo -e "\e[32m*** ss+ws *** (由于ss链接不带传输协议等参数，该链接复制到客户端后需要再手动选择ws和路径) \e[0m"
@@ -179,7 +186,8 @@ function print_ss_inbounds() {
 	echo "链接:"
 	ss_str='chacha20-ietf-poly1305:b25b63c585a0987d6'
 	ss_str='ss://'$(echo $ss_str | base64)"@"${my_ip}":32012#ss+ws"
-	echo ${ss_str}		
+	echo ${ss_str}	
+	echo ${ss_str}	>> allinbounds.txt	
 
 	echo -e "\n"
 	echo -e "\e[32m*** ss+tcp+ng *** \e[0m"
@@ -191,6 +199,7 @@ function print_ss_inbounds() {
 	ss_str='chacha20-ietf-poly1305:b25b63c585a0987d6'
 	ss_str='ss://'$(echo $ss_str | base64)"@"${my_ip}":32013#ss+tcp+ng"
 	echo ${ss_str}	
+	echo ${ss_str}	>> allinbounds.txt
 	
 	echo -e "\n"
 	echo -e "\e[32m*** ss+ws+ng *** (由于ss链接不带传输协议等参数，该链接复制到客户端后需要再手动选择ws和路径) \e[0m"
@@ -203,6 +212,7 @@ function print_ss_inbounds() {
 	ss_str='chacha20-ietf-poly1305:b25b63c585a0987d6'
 	ss_str='ss://'$(echo $ss_str | base64)"@"${my_ip}":32014#ss+ws+ng"
 	echo ${ss_str}	
+	echo ${ss_str}	>> allinbounds.txt
 	echo "============================================================"
 }
 
@@ -214,7 +224,8 @@ function print_vless_inbounds() {
 	echo "加密方式: none"
 	echo "传输协议: tcp"
 	echo "链接:"
-	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32015?encryption=none&security=none&type=tcp#vless+tcp"	
+	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32015?encryption=none&security=none&type=tcp#vless+tcp"
+	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32015?encryption=none&security=none&type=tcp#vless+tcp"	>> allinbounds.txt
 
 	echo -e "\n"
 	echo -e "\e[32m*** vless+ws *** \e[0m"
@@ -225,6 +236,7 @@ function print_vless_inbounds() {
 	echo "路径: /ab596b5a5d3636b579bc0d2f000"
 	echo "链接:"
 	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32016?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b579bc0d2f000#vless+ws"	
+	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32016?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b579bc0d2f000#vless+ws" >> allinbounds.txt
 
 	echo -e "\n"
 	echo -e "\e[32m*** vless+tcp+ng *** \e[0m"
@@ -234,6 +246,7 @@ function print_vless_inbounds() {
 	echo "传输协议: tcp"
 	echo "链接:"
 	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32017?encryption=none&security=none&type=tcp#vless+tcp+ng"
+	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32017?encryption=none&security=none&type=tcp#vless+tcp+ng" >> allinbounds.txt
 
 	echo -e "\n"
 	echo -e "\e[32m*** vless+ws+ng *** \e[0m"
@@ -243,7 +256,8 @@ function print_vless_inbounds() {
 	echo "传输协议: ws"
 	echo "路径: /ab596b5a5d3636b579bc0d2f000"
 	echo "链接:"
-	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32018?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b579bc0d2f000#vless+ws+ng"		
+	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32018?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b579bc0d2f000#vless+ws+ng"	
+	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32018?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b579bc0d2f000#vless+ws+ng" >> allinbounds.txt	
 
 	echo -e "\n"
 	echo -e "\e[32m*** vless+kcp *** \e[0m"
@@ -253,7 +267,8 @@ function print_vless_inbounds() {
 	echo "传输协议: kcp"
 	echo "kcp seed:c25785a6987d235897"
 	echo "链接:"
-	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32019?encryption=none&security=none&type=kcp&headerType=none&seed=c25785a6987d235897#vless+kcp"				
+	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32019?encryption=none&security=none&type=kcp&headerType=none&seed=c25785a6987d235897#vless+kcp"		
+	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32019?encryption=none&security=none&type=kcp&headerType=none&seed=c25785a6987d235897#vless+kcp"	>> allinbounds.txt		
 	echo "============================================================"
 }
 
@@ -268,6 +283,7 @@ function print_vmess_inbounds() {
 	vmess_str='{"v": "2","ps": "vmess+tcp","add": "'${my_ip}'","port": "32020","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "none","net": "tcp","type": "none","host": "","path": "","tls": "","sni": "","alpn": ""}'
 	vmess_str='vmess://'$(echo $vmess_str | base64)
 	echo ${vmess_str}
+	echo ${vmess_str} >> allinbounds.txt
 
 	echo -e "\n"
 	echo -e "\e[32m*** vmess+ws *** \e[0m"
@@ -280,6 +296,7 @@ function print_vmess_inbounds() {
 	vmess_str='{"v": "2","ps": "vmess+ws","add": "'${my_ip}'","port": "32021","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "auto","net": "ws","type": "none","host": "","path": "/ab596b5a5d3636b579bc0d2f000","tls": "","sni": "","alpn": ""}'
 	vmess_str='vmess://'$(echo $vmess_str | base64)
 	echo ${vmess_str}	
+	echo ${vmess_str} >> allinbounds.txt
 
 	echo -e "\n"
 	echo -e "\e[32m*** vmess+tcp+ng *** \e[0m"
@@ -290,7 +307,8 @@ function print_vmess_inbounds() {
 	echo "链接:"
 	vmess_str='{"v": "2","ps": "vmess+tcp+ng","add": "'${my_ip}'","port": "32022","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "none","net": "tcp","type": "none","host": "","path": "","tls": "","sni": "","alpn": ""}'
 	vmess_str='vmess://'$(echo $vmess_str | base64)
-	echo ${vmess_str}	
+	echo ${vmess_str}
+	echo ${vmess_str} >> allinbounds.txt	
 
 	echo -e "\n"
 	echo -e "\e[32m*** vmess+ws+ng *** \e[0m"
@@ -303,6 +321,7 @@ function print_vmess_inbounds() {
 	vmess_str='{"v": "2","ps": "vmess+ws+ng","add": "'${my_ip}'","port": "32023","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "auto","net": "ws","type": "none","host": "","path": "/ab596b5a5d3636b579bc0d2f000","tls": "","sni": "","alpn": ""}'
 	vmess_str='vmess://'$(echo $vmess_str | base64)
 	echo ${vmess_str}	
+	echo ${vmess_str} >> allinbounds.txt
 
 	echo -e "\n"
 	echo -e "\e[32m*** vmess+kcp(易被墙) *** \e[0m"
@@ -315,6 +334,7 @@ function print_vmess_inbounds() {
 	vmess_str='{"v": "2","ps": "*vmess+kcp","add": "'${my_ip}'","port": "32024","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "auto","net": "kcp","type": "none","host": "","path": "c25785a6987d235897","tls": "","sni": "","alpn": ""}'
 	vmess_str='vmess://'$(echo $vmess_str | base64)
 	echo ${vmess_str}	
+	echo ${vmess_str} >> allinbounds.txt
 
 	echo -e "\n"
 	echo -e "\e[32m*** vmess+kcp+ng *** \e[0m"
@@ -326,7 +346,8 @@ function print_vmess_inbounds() {
 	echo "链接:"
 	vmess_str='{"v": "2","ps": "vmess+kcp+ng","add": "'${my_ip}'","port": "32027","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "auto","net": "kcp","type": "none","host": "","path": "c25785a6987d235897","tls": "","sni": "","alpn": ""}'
 	vmess_str='vmess://'$(echo $vmess_str | base64)
-	echo ${vmess_str}				
+	echo ${vmess_str}	
+	echo ${vmess_str} >> allinbounds.txt			
 	echo "============================================================"
 }
 
@@ -352,7 +373,8 @@ function print_trojan_inbounds() {
 	echo "跳过证书验证: true"
 	echo "alpn: http 1.1"
 	echo "链接:"
-	echo "trojan://b25b63c585a0987d6@"${my_ip}":32028?security=tls&alpn=http%2F1.1&type=tcp&headerType=none#trojan%2Btls%2B%E8%87%AA%E7%AD%BE%E8%AF%81%E4%B9%A6"	
+	echo "trojan://b25b63c585a0987d6@"${my_ip}":32028?security=tls&alpn=http%2F1.1&type=tcp&headerType=none#trojan%2Btls%2B%E8%87%AA%E7%AD%BE%E8%AF%81%E4%B9%A6"
+	echo "trojan://b25b63c585a0987d6@"${my_ip}":32028?security=tls&alpn=http%2F1.1&type=tcp&headerType=none#trojan%2Btls%2B%E8%87%AA%E7%AD%BE%E8%AF%81%E4%B9%A6" >> allinbounds.txt	
 
 	echo -e "\n"
 	echo -e "\e[32m*** trojan+ws+tls *** \e[0m(记得手动设置跳过证书验证为true, 链接中不带此参数)"
@@ -363,7 +385,8 @@ function print_trojan_inbounds() {
 	echo "跳过证书验证: true"
 	echo "alpn: http 1.1"
 	echo "链接:"
-	echo "trojan://b25b63c585a0987d6@"${my_ip}":32029?security=tls&alpn=http%2F1.1&type=ws&path=%2Fab596b5a5d3636b579bc0d2f000#trojan%2Bws%2Btls%2B%E8%87%AA%E7%AD%BE%E8%AF%81%E4%B9%A6"				
+	echo "trojan://b25b63c585a0987d6@"${my_ip}":32029?security=tls&alpn=http%2F1.1&type=ws&path=%2Fab596b5a5d3636b579bc0d2f000#trojan%2Bws%2Btls%2B%E8%87%AA%E7%AD%BE%E8%AF%81%E4%B9%A6"
+	echo "trojan://b25b63c585a0987d6@"${my_ip}":32029?security=tls&alpn=http%2F1.1&type=ws&path=%2Fab596b5a5d3636b579bc0d2f000#trojan%2Bws%2Btls%2B%E8%87%AA%E7%AD%BE%E8%AF%81%E4%B9%A6" >> allinbounds.txt					
 	echo "============================================================"
 }
 
@@ -371,6 +394,9 @@ function print_trojan_inbounds() {
 #函数---显示所有节点
 function print_all_inbounds() {
 	get_my_ip
+
+	rm allinbounds.txt
+	echo -e "所有节点:\n\n" > allinbounds.txt
 	echo "============================================================"
 	print_ss_inbounds
 	print_vless_inbounds
@@ -419,6 +445,8 @@ function print_all_inbounds() {
 	    		continue
 	    		;;
 	    1) 
+			rm allinbounds.txt
+			echo -e "所有节点:\n\n" > allinbounds.txt
 	    		echo -e "\n\n\n\n\n\n\n\n\n\n"
     			print_ss_inbounds
 			print_vless_inbounds
