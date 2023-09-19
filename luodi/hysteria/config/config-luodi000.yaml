@@ -1,0 +1,15 @@
+listen: :32026
+
+tls:
+  cert: /etc/hysteria/ssl/ca.crt 
+  key: /etc/hysteria/ssl/ca.key
+
+auth:
+  type: password
+  password: b25b63c585a0987d6
+
+masquerade: 
+  type: proxy
+  proxy:
+    url: https://www.bing.com/ 
+    rewriteHost: true
