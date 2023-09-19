@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #一键安装脚本
-#wget -O luodi000.sh https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/luodi000.sh && sudo bash luodi000.sh
+#wget -O luodi000.sh https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/luodi000.sh && bash luodi000.sh
 #nginx监听两个端口，两个端口(服务)内容一摸一样，一个作为备用线路
 #搭配中转机使用
 
