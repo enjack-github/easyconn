@@ -390,6 +390,15 @@ function print_trojan_inbounds() {
 	echo "============================================================"
 }
 
+#函数---
+function print_hysteria_inbounds() {
+	echo -e "\n"
+	echo -e "\e[32m*** hysteria *** (流量大易被墙)\e[0m"
+	echo "端口: 32026"
+	echo "密码: b25b63c585a0987d6"				
+	echo "============================================================"
+}
+
 
 #函数---显示所有节点
 function print_all_inbounds() {
@@ -403,6 +412,7 @@ function print_all_inbounds() {
 	print_vmess_inbounds
 	print_socks5_inbounds
 	print_trojan_inbounds
+	print_hysteria_inbounds
 	print_luodi3_inbounds
 	print_luodi5_inbounds
 	print_luodi6_inbounds
@@ -434,7 +444,8 @@ function print_all_inbounds() {
 	echo "8) 兼容luodi6.sh节点"
 	echo "9) 兼容luodi7.sh节点"
 	echo "10) socks5节点"
-	echo "11) trojan节点"	
+	echo "11) trojan节点"
+	echo "12) hysteria节点"	
 	read -r -p "请输入数字选择(直接按回车键返回上级): " input
 	case $input in
 	    0) 
@@ -453,6 +464,7 @@ function print_all_inbounds() {
 			print_vmess_inbounds
 			print_socks5_inbounds
 			print_trojan_inbounds
+			print_hysteria_inbounds
 			print_luodi3_inbounds
 			print_luodi5_inbounds
 			print_luodi6_inbounds
@@ -532,7 +544,14 @@ function print_all_inbounds() {
 	    		echo -e "\e[33m 回车键返回菜单 \e[0m\c"
 	    		read -r -p "" input
 	    		continue
-	    		;;  	    		   		   			    		  		
+	    		;;  	   
+	    12) 
+	    		echo -e "\n\n\n\n\n\n\n\n\n\n"
+	    		print_hysteria_inbounds
+	    		echo -e "\e[33m 回车键返回菜单 \e[0m\c"
+	    		read -r -p "" input
+	    		continue
+	    		;;  		    		 		   		   			    		  		
 	    *) 
 	    		#echo "invalid option...退出脚本"
 	    		#exit 1
@@ -637,6 +656,14 @@ function install_my_service() {
 	openssl req -new -x509 -days 36500 -key /root/ssl/self/ca.key -out /root/ssl/self/ca.crt  -subj "/CN=bing.com"
 	chmod 777 /root/ssl/self/ca.key
 	chmod 777 /root/ssl/self/ca.crt
+
+	echo "停止服务"
+	systemctl disable v2ray.service
+	systemctl stop v2ray.service
+	systemctl disable nginx.service
+	systemctl stop nginx.service
+	systemctl disable hysteria-server.service
+	systemctl stop hysteria-server.service
 	
 	echo "下载v2ray安装脚本"
 	rm v2ray-install-release.sh
@@ -665,6 +692,7 @@ function install_my_service() {
 	wget -O jiedian.json https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/v2ray/config/luodi000-all.json
 	rm /usr/local/etc/v2ray/config.json
 	cp jiedian.json /usr/local/etc/v2ray/config.json
+	rm jiedian.json
 	#用当前ip的base64编码，作为ws路径
 	sed -i "s/replace-with-you-path/$ip_base64/g" /usr/local/etc/v2ray/config.json
 	
@@ -680,17 +708,33 @@ function install_my_service() {
 	#用当前ip的base64编码，作为ws路径
 	sed -i "s/replace-with-you-path/$ip_base64/g" /etc/nginx/nginx.conf
 	rm nginx.conf
+
+	#安装hysteria
+	bash <(curl -fsSL https://get.hy2.sh/)
+
+	#复制证书到hysteria目录，否则hystetia没有权限读取/root下的证书文件
+	mkdir /etc/hysteria/ssl
+	mkdir /etc/hysteria/ssl/self
+	cp /root/ssl/self/ca.crt /etc/hysteria/ssl/self/ca.crt
+	cp /root/ssl/self/ca.key /etc/hysteria/ssl/self/ca.key
+	chmod 777 /etc/hysteria/ssl/self/ca.crt
+	chmod 777 /etc/hysteria/ssl/self/ca.key
+	
+	wget -O /etc/hysteria/config.yaml https://raw.githubusercontent.com/enjack-github/easyconn/main/luodi/hysteria/config/config-luodi000.yaml
+	chmod 777 /etc/hysteria/config.yaml
 	
 	#启用bbr
 	echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf && echo "net.ipv4.tcp_congestion_control= bbr" >> /etc/sysctl.conf&& sysctl -p
 	
-	echo "重启v2ray nginx"
-	systemctl restart v2ray.service
-	systemctl restart nginx.service
+	echo "重启服务"
+	sudo systemctl restart v2ray.service
+	sudo systemctl restart nginx.service
+	sudo systemctl restart hysteria-server.service
 	
 	#设置开机启动(v2ray需要设置，nginx本身就会自启动)
 	sudo systemctl enable v2ray.service
 	sudo systemctl enable nginx.service
+	sudo systemctl enable hysteria-server.service
 	
 	ufw_setting
 	
@@ -742,6 +786,7 @@ function main_menu() {
 	    3) 
 	    		systemctl restart v2ray
 	    		systemctl restart nginx
+	    		systemctl restart hysteria-server.service
 	    		echo -e "\e[1;36m\n服务已重启\e[0m"
 	    		continue
 	    		;;    		
@@ -773,6 +818,3 @@ function main_menu() {
 
 #脚本功能选择
 main_menu
-
-
-
