@@ -764,7 +764,6 @@ function main_menu() {
 	echo -e "\e[35;46m                                   合集                                    \e[0m"
 	echo -e "\e[33;46m                                                                           \e[0m"
 	
-	rm tools.sh
 	cp luodi000.sh tools.sh
 	chmod 777 tools.sh
 	
