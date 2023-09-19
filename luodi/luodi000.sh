@@ -395,7 +395,8 @@ function print_hysteria_inbounds() {
 	echo -e "\n"
 	echo -e "\e[32m*** hysteria *** (流量大易被墙)\e[0m"
 	echo "端口: 32026"
-	echo "密码: b25b63c585a0987d6"				
+	echo "密码: b25b63c585a0987d6"		
+	echo "insecure: true (自签证书)"			
 	echo "============================================================"
 }
 
@@ -626,6 +627,14 @@ function ufw_setting() {
 
 #函数---安装节点
 function install_my_service() {
+	#判断是否是root用户
+	if [ $UID -ne 0 ]; then
+		echo -e "\e[33m当前非root用户，请使用root用户运行此脚本\e[0m"
+		exit 0
+	else
+		echo "current user is root."
+	fi
+	
 	#判断是否首次运行，首次则安装依赖包
 	if [ -f "/root/.first_run_luodi_script" ];then
 		echo "tag file exist, do not need install tools"
@@ -766,10 +775,9 @@ function main_menu() {
 	echo "1) 安装"
 	echo "2) 查看节点配置"
 	echo "3) 重启服务"
-	echo "4) 查看v2ray运行状态"
-	echo "5) 查看v2ray配置文件"
-	echo "6) 查看nginx运行状态"
-	echo "7) 查看nginx配置文件"
+	echo "4) 查看v2ray运行状态		5) 查看v2ray配置文件"
+	echo "6) 查看nginx运行状态		7) 查看nginx配置文件"
+	echo "8) 查看hysteria运行状态		9) 查看hysteria配置文件"
 	read -r -p "请输入数字选择(直接按回车键退出脚本): " input
 	case $input in
 	    1) 
@@ -805,7 +813,15 @@ function main_menu() {
 	    7) 
 	    		cat /etc/nginx/nginx.conf
 	    		continue
-	    		;;    		
+	    		;;   
+	    8) 
+	    		systemctl status hysteria-server.service
+	    		continue
+	    		;;
+	    9) 
+	    		cat /etc/hysteria/config.yaml
+	    		continue
+	    		;; 	    		 		
 	    *) 
 	    		echo -e "\e[36minvalid option...退出脚本\e[0m"
 	    		exit 1
