@@ -2,7 +2,7 @@ listen: :32026
 
 tls:
   cert: /etc/hysteria/ssl/self/ca.crt
-  key: /etc/hysteria/ssl/self/ca.crt
+  key: /etc/hysteria/ssl/self/ca.key
 
 auth:
   type: password
