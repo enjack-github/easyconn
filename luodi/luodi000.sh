@@ -628,11 +628,11 @@ function ufw_setting() {
 #函数---安装节点
 function install_my_service() {
 	#判断是否是root用户
-	if [ $UID -ne 0 ]; then
+	if [ $(whoami) == "root" ]; then
+		echo "current user is root."	
+	else
 		echo -e "\e[33m当前非root用户，请使用root用户运行此脚本\e[0m"
 		exit 0
-	else
-		echo "current user is root."
 	fi
 	
 	#判断是否首次运行，首次则安装依赖包
