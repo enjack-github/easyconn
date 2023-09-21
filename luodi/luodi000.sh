@@ -260,7 +260,7 @@ function print_vless_inbounds() {
 	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32018?encryption=none&security=none&type=ws&path=%2Fab596b5a5d3636b579bc0d2f000#vless+ws+ng" >> allinbounds.txt	
 
 	echo -e "\n"
-	echo -e "\e[32m*** vless+kcp *** \e[0m"
+	echo -e "\e[32m*** vless+kcp(易被墙) *** \e[0m"
 	echo "端口: 32019"
 	echo "用户id: af61686b-cb85-293a-a559-eeaa1510bca7"
 	echo "加密方式: none"
