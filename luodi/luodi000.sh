@@ -267,8 +267,8 @@ function print_vless_inbounds() {
 	echo "传输协议: kcp"
 	echo "kcp seed:c25785a6987d235897"
 	echo "链接:"
-	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32019?encryption=none&security=none&type=kcp&headerType=none&seed=c25785a6987d235897#vless+kcp"		
-	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32019?encryption=none&security=none&type=kcp&headerType=none&seed=c25785a6987d235897#vless+kcp"	>> allinbounds.txt		
+	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32019?encryption=none&security=none&type=kcp&headerType=none&seed=c25785a6987d235897#*vless+kcp"		
+	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32019?encryption=none&security=none&type=kcp&headerType=none&seed=c25785a6987d235897#*vless+kcp"	>> allinbounds.txt		
 	echo "============================================================"
 }
 
