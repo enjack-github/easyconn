@@ -166,13 +166,13 @@ function print_luodi7_inbounds() {
 #函数---显示ss节点
 function print_ss_inbounds() {
 	echo -e "\e[32m*** ss+tcp *** \e[0m"
-	echo "端口: 32011"
+	echo "端口: 38010"
 	echo "密码: b25b63c585a0987d6"
 	echo "加密方式: chacha20-ietf-poly1305"
 	echo "传输协议: tcp"
 	echo "链接:"
 	ss_str='chacha20-ietf-poly1305:b25b63c585a0987d6'
-	ss_str='ss://'$(echo $ss_str | base64)"@"${my_ip}":32011#ss+tcp"
+	ss_str='ss://'$(echo $ss_str | base64)"@"${my_ip}":38010#ss+tcp"
 	echo ${ss_str}	
 	echo ${ss_str}	>> allinbounds.txt
 
@@ -579,7 +579,7 @@ function ufw_setting() {
 	ufw allow 35570
 	ufw allow 80
 	#ss+tcp
-	ufw allow 32011
+	ufw allow 38010
 	#ss+ws
 	ufw allow 32012
 	#ss+tcp+ng
