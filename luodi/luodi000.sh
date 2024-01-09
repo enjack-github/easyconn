@@ -28,6 +28,32 @@ function get_my_ip() {
  	echo -e "\n"
 }
 
+#函数--获取用户id，存在则直接读取，不存在则用系统uuid
+function get_user_id() {
+	#读取id记录文件
+	my_user_id=''
+	while read line
+	do
+	    echo $line
+	    my_user_id=${my_user_id}${line}
+	done < .v2_config/user_id.txt
+	
+	
+	#判断长度
+	if [ ${#my_user_id} -gt 5 ]; then
+		echo "read user id from file correct. length>5"
+     else
+     	echo "read user id from file fault"
+     	echo "read from system random uuid"
+     	#文件中没有id，就从系统读取。刚好是8-4-4-4-12格式
+     	my_user_id=$(cat /proc/sys/kernel/random/uuid)
+     	#保存id到文件
+     	mkdir .v2_config
+     	echo ${my_user_id} > .v2_config/user_id.txt
+	fi
+	echo "user id is: "${my_user_id}	
+}
+
 
 #函数---常用节点
 function print_usefull_inbounds() {
@@ -50,6 +76,17 @@ function print_usefull_inbounds() {
 	vmess_str='{"v": "2","ps": "vmess+tcp","add": "'${my_ip}'","port": "32020","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "none","net": "tcp","type": "none","host": "","path": "","tls": "","sni": "","alpn": ""}'
 	vmess_str='vmess://'$(echo $vmess_str | base64)
 	echo ${vmess_str}
+
+	echo -e "\n"
+	echo -e "\e[32m*** vmess+tcp 随机id *** \e[0m     (适合上中转  随机user id)"
+	echo "端口: 32030"
+	echo "用户id: "${my_user_id}
+	echo "加密方式: none"
+	echo "传输协议: tcp"
+	echo "链接:"
+	vmess_str='{"v": "2","ps": "vmess+tcp+RandomUserID","add": "'${my_ip}'","port": "32030","id": "'${my_user_id}'","aid": "0","scy": "none","net": "tcp","type": "none","host": "","path": "","tls": "","sni": "","alpn": ""}'
+	vmess_str='vmess://'$(echo $vmess_str | base64)
+	echo ${vmess_str}	
 	echo "============================================================"
 }
 
@@ -347,7 +384,19 @@ function print_vmess_inbounds() {
 	vmess_str='{"v": "2","ps": "vmess+kcp+ng","add": "'${my_ip}'","port": "32027","id": "af61686b-cb85-293a-a559-eeaa1510bca7","aid": "0","scy": "auto","net": "kcp","type": "none","host": "","path": "c25785a6987d235897","tls": "","sni": "","alpn": ""}'
 	vmess_str='vmess://'$(echo $vmess_str | base64)
 	echo ${vmess_str}	
-	echo ${vmess_str} >> allinbounds.txt			
+	echo ${vmess_str} >> allinbounds.txt	
+
+	echo -e "\n"
+	echo -e "\e[32m*** vmess+tcp 随机id *** \e[0m     (适合上中转  随机user id)"
+	echo "端口: 32030"
+	echo "用户id: "${my_user_id}
+	echo "加密方式: none"
+	echo "传输协议: tcp"
+	echo "链接:"
+	vmess_str='{"v": "2","ps": "vmess+tcp+RandomUserID","add": "'${my_ip}'","port": "32030","id": "'${my_user_id}'","aid": "0","scy": "none","net": "tcp","type": "none","host": "","path": "","tls": "","sni": "","alpn": ""}'
+	vmess_str='vmess://'$(echo $vmess_str | base64)
+	echo ${vmess_str}		
+	echo ${vmess_str} >> allinbounds.txt	
 	echo "============================================================"
 }
 
@@ -619,6 +668,9 @@ function ufw_setting() {
 	ufw allow 32028
 	#trojan+ws+tls
 	ufw allow 32029
+
+	#vmess+tcp 随机user id
+	ufw allow 32030
 	
 	echo -e "\e[31;46m准备开启防火墙...  Attemp to enable ufw \e[0m   选择y打开ufw, 选择n保持现状"
 	sudo ufw enable
@@ -656,6 +708,9 @@ function install_my_service() {
 	#获取ip
 	my_ip="1.2.2.2"
 	get_my_ip
+
+	#获取user id
+	get_user_id
 
 	#自签证书
 	echo "安装自签证书"
@@ -704,6 +759,8 @@ function install_my_service() {
 	rm jiedian.json
 	#用当前ip的base64编码，作为ws路径
 	sed -i "s/replace-with-you-path/$ip_base64/g" /usr/local/etc/v2ray/config.json
+	#替换user id
+	sed -i "s/replace-with-you-uuid/$my_user_id/g" /usr/local/etc/v2ray/config.json
 	
 	echo "安装nginx"
 	apt install -y nginx
@@ -787,6 +844,7 @@ function main_menu() {
 	    2) 
 	    		echo -e "\n\n\n\n\n\n\n\n\n\n\n\n"
 	      	get_my_ip
+	      	get_user_id
 	    		print_all_inbounds
 	    		continue
 	    		;;
@@ -833,3 +891,4 @@ function main_menu() {
 
 #脚本功能选择
 main_menu
+
