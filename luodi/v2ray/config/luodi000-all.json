@@ -47,7 +47,7 @@
                 "network": "ws",
                 "security": "none",
                 "wsSettings": {
-                    "path": "/replace-with-you-path" 
+                    "path": "/NDYuMTcuNDIuMjI5Cg==" 
                 }
             }
         },   
@@ -121,7 +121,7 @@
                 "network": "ws",
                 "security": "auto",
                 "wsSettings": {
-                    "path": "/replace-with-you-path" 
+                    "path": "/NDYuMTcuNDIuMjI5Cg==" 
                 }
             }
         },                	
@@ -241,6 +241,24 @@
                 "network": "tcp"
             }
         },
+
+     #vmess+tcp,随机user id
+        {
+            "listen": "0.0.0.0",
+            "port": 32030,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "replace-with-you-uuid",
+                        "alterId": 0
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp"
+            }
+        },   
         
 	#vmess+ws
          {
