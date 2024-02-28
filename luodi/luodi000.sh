@@ -87,6 +87,15 @@ function print_usefull_inbounds() {
 	vmess_str='{"v": "2","ps": "vmess+tcp+RandomUserID","add": "'${my_ip}'","port": "32030","id": "'${my_user_id}'","aid": "0","scy": "none","net": "tcp","type": "none","host": "","path": "","tls": "","sni": "","alpn": ""}'
 	vmess_str='vmess://'$(echo $vmess_str | base64)
 	echo ${vmess_str}	
+
+	echo -e "\n"
+	echo -e "\e[32m*** vless+tcp 随机id *** \e[0m     (适合上中转  随机user id)"
+	echo "端口: 32031"
+	echo "用户id: "${my_user_id}
+	echo "加密方式: none"
+	echo "传输协议: tcp"
+	echo "链接:"
+	echo "vless://"${my_user_id}"@"${my_ip}":32031?encryption=none&security=none&type=tcp&headerType=none#vless%2Btcp"
 	echo "============================================================"
 }
 
@@ -305,7 +314,17 @@ function print_vless_inbounds() {
 	echo "kcp seed:c25785a6987d235897"
 	echo "链接:"
 	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32019?encryption=none&security=none&type=kcp&headerType=none&seed=c25785a6987d235897#*vless+kcp"		
-	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32019?encryption=none&security=none&type=kcp&headerType=none&seed=c25785a6987d235897#*vless+kcp"	>> allinbounds.txt		
+	echo "vless://af61686b-cb85-293a-a559-eeaa1510bca7@"${my_ip}":32019?encryption=none&security=none&type=kcp&headerType=none&seed=c25785a6987d235897#*vless+kcp"	>> allinbounds.txt	
+
+	echo -e "\n"
+	echo -e "\e[32m*** vless+tcp 随机id *** \e[0m     (适合上中转  随机user id)"
+	echo "端口: 32031"
+	echo "用户id: "${my_user_id}
+	echo "加密方式: none"
+	echo "传输协议: tcp"
+	echo "链接:"
+	echo "vless://"${my_user_id}"@"${my_ip}":32031?encryption=none&security=none&type=tcp&headerType=none#vless%2Btcp"		
+	echo "vless://"${my_user_id}"@"${my_ip}":32031?encryption=none&security=none&type=tcp&headerType=none#vless%2Btcp"	>> allinbounds.txt
 	echo "============================================================"
 }
 
@@ -671,6 +690,9 @@ function ufw_setting() {
 
 	#vmess+tcp 随机user id
 	ufw allow 32030
+
+	#vless_tcp 随机user id
+	ufw allow 32031
 	
 	echo -e "\e[31;46m准备开启防火墙...  Attemp to enable ufw \e[0m   选择y打开ufw, 选择n保持现状"
 	sudo ufw enable
