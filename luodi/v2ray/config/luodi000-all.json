@@ -222,7 +222,27 @@
                     "seed": "c25785a6987d235897"
                 }
             }
-        },	               
+        },	
+
+	#vless+tcp,随机user id
+        {
+            "port": 32031,
+            "listen": "0.0.0.0",
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "replace-with-you-uuid",
+                        "level": 0,
+                        "email": "justafake@v2fly.org"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp"
+            }
+        },	    
 #---vmess----------------------------------------------------------------------------------
 	#vmess+tcp
         {
