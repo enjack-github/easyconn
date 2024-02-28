@@ -817,12 +817,15 @@ function install_my_service() {
 	echo "重启服务"
 	sudo systemctl restart v2ray.service
 	sudo systemctl restart nginx.service
-	sudo systemctl restart hysteria-server.service
+	#默认不开启hysteria
+	#sudo systemctl restart hysteria-server.service
+	sudo systemctl disable hysteria-server.service
+	sudo systemctl stop hysteria-server.service
 	
 	#设置开机启动(v2ray需要设置，nginx本身就会自启动)
 	sudo systemctl enable v2ray.service
 	sudo systemctl enable nginx.service
-	sudo systemctl enable hysteria-server.service
+	#sudo systemctl enable hysteria-server.service
 	
 	ufw_setting
 	
