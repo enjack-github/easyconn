@@ -412,8 +412,29 @@
        
     ],
     "outbounds": [
+        #自由出口,放到block出口前面，不然会匹配到block 		
         {
-            "protocol": "freedom"
+            "protocol": "freedom",
+            "tag": "direct"
+        },
+        #block出口   	
+        {
+			"protocol": "blackhole",
+			"tag": "blocked"
         }
-    ]
+    ],
+
+	#路由规则
+    "routing": {
+    		"rules": [
+    			{
+	    			"type": "field",
+	    			"domain": ["speedtest.com", "speedtest.cn", "speedtest.net", "speedtest.im", "m.speedtest.cn", "5g.speedtest.cn", "myplugin.speedtest.cn",
+	    						"fast.com", "nperf.com", "test.nju.edu.cn", "test.ustc.edu.cn", "itdog.cn", "yuncesu.net", "speed.neu.edu.cn", "speedcheck.org",
+	    						"pcmag.speedtestcustom.com", "speedtest.selectel", "broadbandspeedchecker.co", "bandwidthtest.net", "speedtest.xfinity", "speed.io",
+	    						"verizon.com", "speed.cloudflare.com", "librespeed.cn"],
+	    			"outboundTag": "blocked"
+    			}
+    		]
+    }
 }
