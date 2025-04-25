@@ -863,6 +863,10 @@ function main_menu() {
 	case $input in
 	    1) 
 	    		echo "开始安装"
+       			while true
+	  		do
+     				sleep 1
+	 		done
 	    		install_my_service
 	    		break
 	    		;;
